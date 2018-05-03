@@ -1,3 +1,4 @@
+
 REST API DOCUMENTATION
 ======================
 ----------
@@ -49,8 +50,11 @@ REST API DOCUMENTATION
  1. [Profile Management](#profile-management)
     - [Registration - Step 1](#registration---step-1)
     - [Registration - Step 2](#registration---step-2)
-    - [Registration - Step 3 - Admin's Step](#registration---step-3)
-    - [Registration - Step 4 - Admin's Step](#registration---step-4)
+	    - [Verify Registration - Email](#verify-registration---email)
+	    - [Confirm Phone - Optional](#confirm-phone---optional)
+    - [Registration - Step 3](#registration---step-3)
+    - [Registration - List Registered Shops (Admin)](#Registration---List-Registered-Shops-(Admin))
+    - [Registration - Review Shop (Admin)](#Registration---review-shop-(admin))
     - [Social Media Registration](#social-media-registration)
     - [Verify Registration - Email](#verify-registration---email)
     - [Verify Registration - Phone](#verify-registration---phone)
@@ -109,10 +113,6 @@ REST API DOCUMENTATION
     - [List Contact Details](#List-Contact-Details)
     - [Update Contact Details](#Update-Contact-Details)
     - [Update Contact Details’ Status](#Update-Contact-Details’-Status)
- 7. [User and Shop Adverts](#user-and-shop-adverts)
-    - [List Adverts By User and Shop](#List-Adverts-By-User-and-Shop)
-    - [Order Advert](#order-advert)
-    
 ## Classes
  **(ClassLevelOne/ClassLevelTwo/ClassLevelThree)**
  
@@ -2004,7 +2004,7 @@ Our system does have 5 different user roles. Based on their roles, each have acc
  4. Content Administrator
  5. System Administrator
 
-###Registration - Step 1
+### Registration - Step 1
 
     Access : Everyone
 > 
@@ -2034,71 +2034,17 @@ Our system does have 5 different user roles. Based on their roles, each have acc
     }
     }
 
-####Parameters
+#### Parameters
 `name` Full Name of the user/shop/campaigner
 `email` : Email to be registered with the system
 `password` : Password with conformity (Mix of upper, lower case, number and sign)
 `password2` : Matching password
 
 
-###Registration - Step 2
+### Registration - Step 2
+This section contains instructions involves in the second step of the registration.
 
-    Access : Profile Owner, Content Admin, System Admin
-> 
-    POST /profile/<id> HTTP/1.1
-    Cache-Control: no-cache
-    Content-Type: multipart/form-data;
-    Request : "userType":<userType>
-
-####Parameters
-`id` This is the unique id of the user
-`userType` : `user | shop | campaigner`
-    
-###Registration - Step 3
-
-    Access : Content Admin, System Admin
-> 
-    GET /userReview HTTP/1.1
-
-This is to list pending registration from shops
-
-###Registration - Step 4
-
-    Access : Content Admin, System Admin
-> 
-    POST /reviewBusiness/<businessId> HTTP/1.1
-    Content-Type: application/json
-    Cache-Control: no-cache
-    Request :
-    {
-	    "status":<statusText>
-    }
-
-
-####Parameters
-`businessId` This is the unique id of the shop/campaigner
-`status` : `complete | rejected | pending`
-
-###Social Media Registration
-
-    Access : Everyone
-
-> 
-	POST /oauth HTTP/1.1
-	Content-Type: application/json
-	Cache-Control: no-cache
-	Request :
-	{
-		"provider":<social_provider>,
-		"idToken":<id_token>
-	}
-	
-####Parameters
-`idToken` This is the id token of the user from the relevant social provider. Initial handshake must be done from the relevant platform and the resultant idToken must be passed here.
-`provider` : `google | facebook`
-
-
-###Verify Registration - Email
+####  Verify Registration - Email
 
     Access : Relevant profile
 > 
@@ -2112,8 +2058,8 @@ This is to list pending registration from shops
 	    ],
 	    "defaultTargetUrl": "/"
     }
-
-###Verify Registration - Phone
+ 
+#### Confirm Phone (Optional)
 
     Access : Relevant profile
 
@@ -2130,8 +2076,66 @@ This is to list pending registration from shops
 	    "emailSent": true,
 	    "errors": []
 	}
+	 
+### Registration - Step 3
 
-###Forgot Password
+    Access : Profile Owner, Content Admin, System Admin
+> 
+    POST /profile/<id> HTTP/1.1
+    Cache-Control: no-cache
+    Content-Type: multipart/form-data;
+    Request : "userType":<userType>
+
+#### Parameters
+`id` This is the unique id of the user
+`userType` : `user | shop | campaigner`
+    
+    
+### Registration - List Registered Shops (Admin)
+
+    Access : Content Admin, System Admin
+> 
+    GET /userReview HTTP/1.1
+
+This is to list pending registration from shops
+
+### Registration - Review Shop (Admin)
+
+    Access : Content Admin, System Admin
+> 
+    POST /reviewBusiness/<businessId> HTTP/1.1
+    Content-Type: application/json
+    Cache-Control: no-cache
+    Request :
+    {
+	    "status":<statusText>
+    }
+
+
+#### Parameters
+`businessId` This is the unique id of the shop/campaigner
+`status` : `complete | rejected | pending`
+
+### Social Media Registration
+
+    Access : Everyone
+
+> 
+	POST /oauth HTTP/1.1
+	Content-Type: application/json
+	Cache-Control: no-cache
+	Request :
+	{
+		"provider":<social_provider>,
+		"idToken":<id_token>
+	}
+	
+#### Parameters
+`idToken` This is the id token of the user from the relevant social provider. Initial handshake must be done from the relevant platform and the resultant idToken must be passed here.
+`provider` : `google | facebook`
+
+
+### Forgot Password
 
     Access : Anonymous
 
@@ -2143,7 +2147,7 @@ This is to list pending registration from shops
         "username" : "{{username}}"
     }
     
-###Reset Password
+### Reset Password
 
     Access : Forgot password link holders
 
@@ -2157,7 +2161,7 @@ This is to list pending registration from shops
         "t" : "Token received in email. This will be available in the query string of front-end page (Reset password page)"
     }
 
-###Login with Email
+### Login with Email
 
     Access : Anonymous
 
@@ -2170,7 +2174,7 @@ This is to list pending registration from shops
         "password":"{{password}}"
     }
 
-###Login with Social Identification
+### Login with Social Identification
 
     Access : Anonymous - Social network users
 
@@ -2180,13 +2184,13 @@ This is to list pending registration from shops
     Content-Type : application/json
     Request : 
     {
-        "provider":"google or facebook",
+        "provider":"{{google ¦ facebook}}",
         "idToken": "id_token"
     }
     
-##Profile
+## Profile
 
-###List All Users' Profile
+### List All Users' Profile
 
     Access : Content Admin, System Admin
 
@@ -2194,7 +2198,7 @@ This is to list pending registration from shops
 
     GET : /user
 
-###Get User Profile
+### Get User Profile
 
     Access : Everyone
 
@@ -2202,7 +2206,7 @@ This is to list pending registration from shops
 
     GET : /user/{{userId}}
     
-###Update User Profile
+### Update User Profile
 
     Access : Everyone
 
@@ -2808,34 +2812,13 @@ As you can see above, following the submission, the status automatically sets to
     Request : { "status":"Completed ¦ In Progress" }
     
 
-## User And Shop Adverts
-This section guides you through different operation involves with advert(s)
-
-#### List Adverts By User and Shop
-This endpoint lists adverts for a given user or shop. It can further be filtered by adding additional query string parameters. Please check the note below for more information.
-
-    Access : Everyone including anonymous
->
-    GET : /adverts/deal?user={userId or shopId}
->
-    Note : Additional Query string params
-    status : {approved | pending}
-    isdeal : {true | false}
-    q : search keyword
-
-#### Order Advert
-This endpoint allows the adverts to be ordered so that the list of adverts by shop will be in the specified order.
-    Access : Content Admin, System Admin, Shop
->
-    PUT : /adverts/order
-    Content-Type : application/json
-    Request :
-    {
-     "id":"{advert id}",
+###Order in Advert 
+**/adverts/order (PUT)
+```{
+     "id":"Xp9-ja05S_GO8jfysjfX-Q",
      "menuOrder":"3"
-    }
-
-
+   }
+```
 ###Video Upload
 
 **/videoUpload** (POST AND FORMDATA)
