@@ -1957,6 +1957,7 @@ Adjust nginx config located at `/etc/nginx/nginx.conf` by adding following insid
 ```
 server {
         listen  80;
+	client_max_body_size 8M;
 	server_name 40.86.176.255;
         location / {
             proxy_set_header    Host $host;
@@ -1968,6 +1969,7 @@ server {
 ```
 
 > Note: You can add other dns in server_name. Also replace server_name with your own public ip.
+> `client_max_body_size`: You have set the maximum file size to be allowed on each REST endpoint payload. (E.g icon images etc)
 
 Now start nginx service
 ```
@@ -2219,18 +2221,24 @@ This is to list pending registration from shops
     {
         "name":{{new name}},
         "phoneNumber":{{new phone number}}, //The new number will be getting validation sms.
-        "businessLogo":{{file path of logo}}, //The business related fields are only for shops
-        "contactName" : {{contact name}},
-        "contactNumber" : {{contact number}},
-        "serviceDescription" : {{service related description}}, //This is multiline text
-        "openingTime" : {{opening times}}, //This should be an HTML section. The HTML must be sent from front-end
-        "picture" : {{file path of profile picture}},
-        "location" : {{Location information}},
-        "birthday" : {{Valid date}}
-        "bannerImage":{{file path of banner image}},
-        "idNumber" : {{social identification number}},
+        "businessLogo":{{file path of logo}}, //business
+        "contactName" : {{contact name}}, //business
+        "contactNumber" : {{contact number}}, //business
+        "serviceDescription" : {{service related description}}, //business
+        "openingTime" : {{opening times}}, //business, This should be an HTML section. The HTML must be sent from front-end
+        "picture" : {{file path of profile picture}}, //regular user
+        "location" : {{Location information}}, //everyone
+        "birthday" : {{Valid date}} //regular user
+        "bannerImage":{{file path of banner image}}, //everyone
+        "idNumber" : {{social identification number}}, //everyone
         "userType":{{user | shop | campaigner}} //One of these three values
     }
+
+`userType`is the decisive field, must be placed first on the complete-registration page. Based on the value selected on this field, complete-registration page should ask for additional information. 
+If the `userType` = shop, generate the form with HTML controls for `//business` fields on the above
+
+If the user has selected the business, it should also list all available memberships. Please look at the membership listing [List All Packages](#List-All-Packages). Upon selecting a membership, payment gateway should be triggered.
+Please refer [Payment](#payment) section.
 
 ## Notifications & Actions
 This section guides you through how to setup/amend the email and sms notifications templates.
@@ -2554,28 +2562,65 @@ This section guides you through create, update, delete campaigns and campaign re
         "status":{{active | used | expired}}
     }
 
-## Membership & Payment
-This section guides you through adverts' premium, addons creation and payment. Further it explains about the membership creation and membership related payment flow.
+## Membership, Packages & Payment
+This section guides you through adverts' packages, addons creation and payment. Further it explains about the membership creation and membership related payment flow.
 
-#### Create Premium Types
+### Membership
+This refers to shop users only. Shop users can exist only with a membership.
+#### Create Membership Type
     Access : Content Admin, System Admin
 >
-    POST : /premium
+    POST : /membership
+    Content-Type : application/json
+    Request : 
+    {
+    	"numberOfMonth":9,
+    	"membershipCost":8,
+    	"membershipType":"ANNUAL"
+    }
+ 
+ #### Update Membership Type
+ 
+	 Access : Content Admin, System Admin
+>
+	PUT : /membership
+	Content-Type : application/json
+	Request :
+	{
+		"numberOfMonth":9,
+    	"membershipCost":8,
+    	"membershipType":"ANNUAL"
+	}
+
+#### Delete Membership Type
+
+### Packages
+This refers to upgrade option for adverts. Anyone can upgrade their adverts with one of the available package. A variation of this is called Addon. The addon allows anyone to choose specific feature to be upgraded on the advert and upgrade it.
+
+#### Create Package
+    Access : Content Admin, System Admin
+>
+    POST : /package
     Content-Type : application/json
     Request :
     {
-      "packageName":"GOLD",
-      "packageDescription":"This offers.....",
-      "premiumCost":"15.00"
-    }
-    
-#### Associate Main Image and Icon for Premium Type
+	  "packageName":"GOLD",
+	  "packageDescription":"Golden type adverts",
+	  "premiumCost":"15.00",
+	  "isActive" : true,
+	  "packageOrder" : 2,
+	  "validDays" : 5
+	}
+   `validDays` : It refers to the number of days the given package promoted
+   `isActive` : Only active packages are displayed for the user to select. The system keep inactive packages to support for the historical advert packages
+   
+#### Associate Main Image and Icon for Package Type
     Access : Content Admin, System Admin
 >
-    POST : /premium/upload
+    POST : /package/upload
     Content-Type : form-data
     Request : 
-        id : {{premiumTypeId}}
+        id : {{packageTypeId}}
         packageImage : {{file path for main image}}
         packageIcon : {{file path for icon}}
 
@@ -2588,7 +2633,7 @@ This section guides you through adverts' premium, addons creation and payment. F
     {
       "addonsName":"XYZ Addon",
       "addonsDescription":"This feature enables...",
-      "premiumCost":1.00,
+      "addonsCost":1.00,
       "isPure":"true"
     }
     
@@ -2602,10 +2647,10 @@ This section guides you through adverts' premium, addons creation and payment. F
         packageImage : {{file path for main image}}
         packageIcon : {{file path for icon}}
       
-#### Update Premium Type
+#### Update Package
     Access : Content Admin, System Admin
 >
-    PUT : /premium/{{premiumTypeId}}
+    PUT : /package/{{packageId}}
     Content-Type : application/json
     Request :
     {
@@ -2627,10 +2672,10 @@ This section guides you through adverts' premium, addons creation and payment. F
       "isPure":"false"
     }
     
-#### List All Premium Types
+#### List All Packages
     Access : Everyone including anonymous
 >
-    GET : /premium
+    GET : /package
 
 #### List All Addons
     Access : Everyone including anonymous
@@ -2642,33 +2687,27 @@ This section guides you through adverts' premium, addons creation and payment. F
 >
     GET : /addons/pure
 
-#### Delete Premium Type
+#### Delete Package
     Access : Content Admin, System Admin
 >
-    DELETE : /premium/{{premiumTypeId}}
+    DELETE : /package/{{packageId}}
   
 #### Delete Addon
     Access : Content Admin, System Admin
 >
     DELETE : /addons/{{addonId}}
-     
-#### Create Membership Type
-    Access : Content Admin, System Admin
->
-    POST : /membership
-    Content-Type : application/json
-    Request : 
-    {
-    	"numberOfMonth":9,
-    	"membershipCost":8,
-    	"membershipType":"ANNUAL"
-    }
 
 #### Payment
-Please note that paypal is now working with the webhook technology. Redirect the user based on the response.
-Once the payment is done in paypal, our DB will be automatically updated with payment information (This is done by paypal notification POST). From the front-end, you have to poll for the updated information with paymentId. [Poll for Payment Details](#poll-for-payment-details)
-Paycorp is our bank payment gateway.
-##### Membership
+Payment can be executed in three different ways.
+	- Credit card
+	- Paypal
+	- Bank transfer (This is admin's task to enter the bank payment manually)
+
+Based on the `paymentMethod`on the input param of relevant payment endpoint, either Credit card or Paypal related `redirectURL` will be generated in the response of the payment endpoint.
+Please note that paypal is enabled with the webhook technology. Redirect the user based on the response.
+Once the payment is done in paypal, our DB will be automatically updated with payment information (This is done by paypal notification POST). From the front-end, you have to poll for the updated information with paymentId. [Poll for Payment Details](#poll-for-payment-details).
+
+##### Membership Payment
     Access : Shops
 >
     POST : /paymember
@@ -2690,7 +2729,7 @@ Paycorp is our bank payment gateway.
         "webhookId": "3N004445LC022391P"
     }
 
-##### Addons
+##### Addons Payment
 *This is under the review*
     
     Access : Registered users or shops
