@@ -1,0 +1,981 @@
+/* Navigation 
+
+1. Basic link styles
+
+2. Main menu and submenu
+
+    2.0 Contact submenu
+
+    2.1 Horizontal menus and chips
+
+    2.2. Vertical menus
+
+        2.2.1 Refiner Checkboxes
+
+        2.2.2 Home page search over navigation
+
+        2.2.3. Mobile navigation
+
+3. TAB navigation
+
+4. Links
+
+    4.1. Results page
+
+    4.2. Ad creation
+
+5. Icons
+
+6. Footer 
+
+*/
+
+/* 1. Basic link styles ------------------------------------------------------ start-region */
+
+a {
+    color: #000153;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #cc0c2f;
+}
+
+a.basic-link {
+    line-height: 40px;
+    padding: 15px;
+    margin: 15px auto;
+}
+
+/* end-region */
+
+
+/* 2 Main menu and submenu --------------------------------------------------- start-region */
+
+ul.main-nav-lvl1 {
+    margin: 0;
+    padding: 0;
+}
+
+li.main-nav-top-tier {
+    display: inline-block;
+    line-height: 90px;
+    margin: 0;
+    padding: 0;
+}
+
+ul.main-nav-lvl1,
+ul.main-nav-lvl1 ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.main-nav-lvl1 ul { 
+    display: none; 
+}
+
+ul.main-nav-lvl2 {
+    background: #eeeaf7;
+    height: 480px;
+    left: 130px;
+    position: absolute;
+}
+
+div.main-submenu-bg {
+    border-radius: 10px;
+    display: none;
+    background: #eeeaf7;
+    height: 480px;
+    left: 10%;
+    position: absolute;
+    width: 80%;
+}
+
+li:hover > div.main-submenu-bg {
+  box-shadow: 0 1px 8px rgba(0, 1, 83, 0.3);
+  display: block;
+}
+
+ul.main-nav-lvl2 li {
+    width: 240px;
+}
+
+ul.main-nav-lvl2 li a
+{
+  color: #000153;
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  padding: 0 1em;
+  text-decoration: none;
+  white-space: nowrap;
+  width: 240px;
+}
+
+ul.main-nav-lvl3 {
+    height: 480px;
+    left: 265px;
+    position: absolute;
+    top: 0;
+    width: 240px;
+}
+
+ul.main-nav-lvl2>li>a::after,
+ul.main-nav-lvl3>li>a::after {
+    content: "\f105";
+    font-family: FontAwesome;
+    position: absolute;
+    left: 250px;
+}
+
+ul.main-nav-lvl2 li:hover > a,
+ul.main-nav-lvl3 li:hover > a,
+ul.main-nav-lvl4 li:hover > a { 
+    background: #fff; 
+    color: #cc0c2f;
+    height: 40px;
+    line-height: 40px;
+}
+
+li:hover ul.main-nav-lvl2,
+li:hover > ul.main-nav-lvl3,
+li:hover > ul.main-nav-lvl4 {
+  display: block;
+}
+
+li.main-nav-top-tier a {
+    color: #fff;
+    line-height: 50px;
+    /* *1.5 from body property */
+    padding: 20px 18px;
+    text-decoration: none;
+}
+
+li.main-nav-top-tier a:hover {
+    color: #3f95aa;
+}
+
+/* end-region */
+
+
+/* 2.0 Contact submenu ------------------------------------------------------- start-region*/
+
+li.main-nav-top-tier.login-menu,
+li.main-nav-top-tier.logout-menu{
+    position: relative;
+}
+
+li.main-nav-top-tier.login-menu {
+    display: none;
+}
+
+a.contact-image-container {
+    height: 38px;
+    position: relative;
+    width: 38px;
+}
+
+img.contact-image {
+    border-radius: 100%;
+    height: 38px;
+    left: -10px;
+    position: relative;
+    top: 13px;
+    width: 38px;
+}
+
+.logout-menu:hover ul.contact-submenu,
+.login-menu:hover ul.contact-submenu {
+    display: block;
+}
+
+ul.contact-submenu {
+    background: #eeeaf7;
+    border-radius: 10px;
+    max-width: 300px;
+    min-width: 200px;
+    position: absolute;
+    left: -50px;
+    
+}
+
+ul.contact-submenu li,
+ul.contact-submenu a{
+    color: #000153;
+    line-height: 40px;
+}
+
+ul.contact-submenu a:hover {
+    color: #cc0c2f;
+}
+
+ul.contact-submenu li:hover {
+    background: #fff;
+}
+
+ul.contact-submenu li:first-child {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+ul.contact-submenu li:first-child:hover {
+    background: none;
+}
+
+ul.contact-submenu li:last-child {
+    margin-bottom: 10px;
+}
+
+/*end-region*/
+
+
+/* 2.1 Horizontal menus and chips -------------------------------------------- start-region  */
+
+ul.chips,
+ul.home-chips,
+ul.tab-nav,
+ul.home-tab,
+ul.breadcrumbs,
+.product-tabs {
+    margin: 0;
+    padding: 0;
+}
+
+.chips li,
+.home-chips li,
+.pagination-list li,
+.tab-nav li,
+.home-tab li,
+.breadcrumbs li,
+.product-tabs li {
+    display: inline-block;
+}
+
+.home-chips li {
+    color: #cc0c2f;
+    margin: 0 15px 10px 0;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #cc0c2f;
+}
+
+.chips li {
+    background-color: #3f95aa;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 10px 15px 0;
+    padding: 3px 10px;
+}
+
+.chips li:hover {
+    background-color: #cc0c2f;
+    color: #fff;
+}
+
+.home-chips li::after,
+.chips li::after {
+    content: " x";
+}
+
+ul.pagination-list {
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.breadcrumbs li {
+    cursor: pointer;
+    padding: 10px 3px;
+}
+
+.breadcrumbs li:hover {
+    color: #cc0c2f;
+}
+
+.breadcrumbs li::after {
+    color: #000153;
+    content: "/";
+    padding-left: 10px;
+}
+
+.breadcrumbs li:last-child::after {
+    content: "";
+}
+
+
+/* end-region */
+
+
+/* 2.2. Vertical menus ------------------------------------------------------- start-region  */
+
+ul.home-category-list,
+ul.category-list {
+    list-style: none;
+}
+
+/* Homepage categories */
+ul.home-category-list {
+    padding: 0 25px;
+    position: relative;
+}
+
+ul.home-category-list li {
+    cursor: pointer;
+    line-height: 35px;
+}
+
+ul.home-category-list li:hover {
+    color: #cc0c2f;
+}
+
+ul.home-category-list li:first-child {
+    color: #cc0c2f;
+    line-height: 5px;
+    padding-left: 55px;
+    min-height: 40px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+ul.home-category-list li:first-child::first-line {
+    line-height: 25px;
+}
+
+/* Underline for each category subtitle */
+ul.home-category-list li:first-child::after {
+    background-color: #000153;
+    content: "";
+    height: 1px;
+    left: 0px;
+    margin: 1 auto;
+    position: absolute;
+    top: 40px;
+    width: 100%;
+}
+
+/* Icon before each category subtitle */
+ul.home-category-list li:first-child::before {
+    content: "";
+    height: 27px;
+    left: 20px;
+    position: absolute;
+    width: 50px;
+}
+
+li#home-icon-vehicles::before {
+    background: #fff url("../media/icons/vehicle-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-vehicles::before {
+    background: #fff url("../media/icons/vehicle-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-properties::before {
+    background: #fff url("../media/icons/properties-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-properties::before {
+    background: #fff url("../media/icons/properties-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-electronics::before {
+    background: #fff url("../media/icons/electronics-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-electronics::before {
+    background: #fff url("../media/icons/electronics-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-fashion::before {
+    background: #fff url("../media/icons/fashion-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-fashion::before {
+    background: #fff url("../media/icons/fashion-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-hobby::before {
+    background: #fff url("../media/icons/hobby-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-hobby::before {
+    background: #fff url("../media/icons/hobby-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-animals::before {
+    background: #fff url("../media/icons/animals-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-animals::before {
+    background: #fff url("../media/icons/animals-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-garden::before {
+    background: #fff url("../media/icons/garden-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-garden::before {
+    background: #fff url("../media/icons/garden-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-industry::before {
+    background: #fff url("../media/icons/industry-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-industry::before {
+    background: #fff url("../media/icons/industry-icon-on.jpg") no-repeat;
+}
+
+li#home-icon-books::before {
+    background: #fff url("../media/icons/books-icon-off.jpg") no-repeat;
+}
+
+ul.home-category-list:hover li#home-icon-books::before {
+    background: #fff url("../media/icons/books-icon-on.jpg") no-repeat;
+}
+
+
+/* Results view refiner categories */
+ul.category-list {
+    padding: 0 15px;
+}
+
+ul.category-list li {
+    color: #000153;
+    font-size: 1.4rem;
+    padding-bottom: 7px;
+}
+
+ul.category-list li:first-child {
+    color: #cc0c2f;
+    font-family: 'Raleway-Bold', sans-serif;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
+/* end-region */
+
+
+/* 2.2.1 Refiners checkbox --------------------------------------------------- start-region */
+
+.ref-checkbox {
+    margin-right: 5px;
+}
+
+.ref-checkbox:checked + label {
+    color: #cc0c2f;
+    font-family: 'Raleway-Bold', sans-serif;
+    font-weight: normal;
+}
+
+
+/* end-region */
+
+
+/* 2.2.2 Home page search over navigation ------------------------------------ start-region */
+
+#home-search-navigation {
+    display: none;
+}
+
+.search-tips-container {
+    background: #fff;
+    display: none;
+    font-family: Raleway;
+    left: 225px;
+    margin: 0px;
+    padding: 15px; 
+    position: absolute;
+    top: 60px;
+    width: 195px;
+}
+
+ul.search-nav-lvl1 li:hover > div.search-tips-container {
+    display: inherit;
+}
+
+ul.search-nav-lvl1 {
+    position: absolute;
+    left: 10%;
+    top: 130px;
+    z-index: 5;
+}
+
+ul.search-nav-lvl2 {
+    position: absolute;
+    left: 0;
+}
+
+ul.search-nav-lvl1,
+ul.search-nav-lvl1 ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.search-nav-lvl1 ul{
+  background: #eeeaf7;  
+  width: 450px;
+}
+
+ul.search-nav-lvl1 li {
+  display: block;
+  float: left;
+}
+
+ul.search-nav-lvl1 ul { 
+    display: none; 
+}
+
+ul.search-nav-lvl1 li a
+{
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #cc0c2f;
+}
+
+ul.search-nav-lvl2 li a {
+    color: #000153;
+    width: 200px;
+}
+
+ul.search-nav-lvl2 li:hover > a { 
+    color: #cc0c2f;
+}
+
+li:hover > ul.search-nav-lvl2 {
+  display: block;
+  position: absolute;
+}
+
+ul.search-nav-lvl1 li:hover li { 
+    float: none; 
+}
+
+ul.search-nav-lvl1>li:hover>a{
+    border-bottom: 3px solid #f00;
+}
+
+ul.search-nav-lvl1 li:hover li a:hover {
+    background: #fff; 
+}
+
+.search-nav-lvl1 li ul li { 
+    border-top: 0; 
+}
+
+ul.search-nav-lvl1:after,
+ul.search-nav-lvl1 ul:after { 
+    clear: both; 
+}
+
+/* end-region */
+
+
+/* 2.2.3. Mobile navigation -------------------------------------------------- start-region */
+
+nav.mobile-nav {
+    background: #000153;
+    display: none;
+    height: 100%;
+    margin: 150px auto 0 auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+nav.mobile-nav ul {
+    font-size: 22px;
+    margin: 0;
+    padding: 0;
+}
+
+nav.mobile-nav > ul > li > ul {
+    background: #1c1d5e;
+}
+
+nav.mobile-nav > ul > li > ul > li > ul {
+    background: #2f3065;
+}
+
+nav.mobile-nav label,
+nav.mobile-nav a {
+    color: #fff;
+    margin: 10px 10px 10px 25px;
+}
+
+nav.mobile-nav label:hover,
+nav.mobile-nav a:hover {
+    color: #3f95aa;
+}
+
+.cd-accordion-menu input[type=checkbox] {
+	/* hide native checkbox */
+	position: absolute;
+	opacity: 0;
+}
+
+.cd-accordion-menu label, .cd-accordion-menu a {
+	color: #fff;
+	display: block;
+    padding: 10px 10px 10px 0;
+	position: relative;
+}
+
+.cd-accordion-menu label {
+	color: #fff;
+	display: block;
+    padding: 10px 10px 10px 20px;
+	position: relative;
+}
+
+nav.mobile-nav > ul > li > ul > li > label,
+nav.mobile-nav > ul > li > ul > li > a {
+    margin: 10px 10px 10px 45px;
+}
+
+nav.mobile-nav > ul > li > ul > li> ul > li > a {
+    margin: 10px 10px 10px 75px;
+}
+
+/* + or - signs before the tabs */
+.cd-accordion-menu label:before {
+    content: "\f054";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    color: #fff;
+    font-size: 16px;
+    padding-right: 5px;
+    position: absolute;
+    top: 13px;
+    left: 0;
+}
+
+.cd-accordion-menu input[type=checkbox]:checked + label:before {
+    content: "\f078";
+}
+
+.cd-accordion-menu ul {
+	/* by default hide all sub menus */
+	display: none;
+}
+ 
+.cd-accordion-menu input[type=checkbox]:checked + label + ul,
+.cd-accordion-menu input[type=checkbox]:checked + label:nth-of-type(n) + ul {
+	/* use label:nth-of-type(n) to fix a bug on safari (<= 8.0.8) with multiple adjacent-sibling selectors*/
+	/* show children when item is checked */
+	display: block;
+}
+    
+/* end-region */
+
+
+/* 3. TAB navigation --------------------------------------------------------- start-region */
+
+.tab-nav,
+.product-tabs {
+    background-color: #c0bccf;
+    border-bottom: #000153 1px solid;
+    cursor: pointer;
+    height: 50px;
+    font-size: 1.6rem;
+    line-height: 50px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.tab-nav {
+    border-radius: 10px 10px 0 0;
+}
+
+.tab-nav.four-col {
+    position: absolute;
+    width: 100%;
+}
+
+.tab-nav li:hover {
+    color: #cc0c2f;
+    background: #c0bccf;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #c0bccf 0%, #c0bccf 88%, #cc0c2f 88%, #cc0c2f 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #c0bccf 0%, #c0bccf 88%, #cc0c2f 88%, #cc0c2f 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #c0bccf 0%, #c0bccf 88%, #cc0c2f 88%, #cc0c2f 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0bccf', endColorstr='#cc0c2f', GradientType=0);
+    /* IE6-9 */
+}
+
+.tab-nav.two-col li {
+    height: 50px;
+    width: 49%;
+}
+
+.tab-nav.four-col li {
+    height: 50px;
+    width: 24.5%;
+}
+
+ul.home-tab {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+ul.home-tab li {
+    background-color: #fff;
+    border-left: 1px solid #eeeaf7;
+    cursor: pointer;
+    line-height: 60px;
+    position: relative;
+    text-align: center;
+    width: 33%;
+}
+
+ul.home-tab li:hover {
+    color: #cc0c2f;
+}
+
+ul.home-tab li:first-child {
+    border-left: 0;
+    border-radius: 10px 0 0 10px;
+}
+
+ul.home-tab li:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+ul.home-tab > li.home-tab-active {
+    background-color: #000153;
+    color: #fff;
+}
+
+ul.home-tab > li.home-tab-active::before {
+    background-color: #000153;
+    content: "";
+    height: 20px;
+    left: 50%;
+    position: absolute;
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+    top: 50px;
+    width: 20px;
+}
+
+.product-tabs li {
+    width: 32.5%;
+}
+
+.product-tabs li:hover {
+    color: #cc0c2f;
+    background: #c0bccf;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #c0bccf 0%, #c0bccf 88%, #cc0c2f 88%, #cc0c2f 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #c0bccf 0%, #c0bccf 88%, #cc0c2f 88%, #cc0c2f 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #c0bccf 0%, #c0bccf 88%, #cc0c2f 88%, #cc0c2f 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0bccf', endColorstr='#cc0c2f', GradientType=0);
+    /* IE6-9 */
+}
+
+
+/* end-region */
+
+
+/* 4. Links ––––––––––––––––––––––––––––––---------------------–––––––––---–––*/
+
+
+/* 4.1. Results page --------------------------------------------------------- start-region */
+
+.pagination-number {
+    border: #fff 1px solid;
+    border-radius: 100%;
+    color: #3f95aa;
+    display: inline-block;
+    margin: 10px 10px;
+    line-height: 30px;
+    text-align: center;
+    width: 30px;
+}
+
+.pagination-number:hover {
+    border: #cc0c2f 1px solid;
+    color: #cc0c2f;
+}
+
+.pagination-number.pagination-active {
+    background-color: #3f95aa;
+    border: #3f95aa 1px solid;
+    color: #fff;
+}
+
+.pagination-number.pagination-active:hover {
+    background-color: #3f95aa;
+    border: #3f95aa 1px solid;
+    color: #fff;
+}
+
+
+/* end-region */
+
+
+/* 4.2. Ad creation ---------------------------------------------------------- start-region */
+
+a.listing-vertical-text {
+    color: #3f95aa;
+    left: 35px;
+    position: absolute;
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+    width: 100px;
+}
+
+a.listing-vertical-text:hover {
+    color: #fff;
+}
+
+a.listing-vertical-text.listing-active {
+    color: #fff;
+}
+
+a.listing-vertical-text:nth-child(1) {
+    top: 0;
+}
+
+a.listing-vertical-text:nth-child(2) {
+    top: 100px;
+}
+
+a.listing-vertical-text:nth-child(3) {
+    top: 200px;
+}
+
+a.listing-vertical-text:nth-child(4) {
+    top: 300px;
+}
+
+a.listing-vertical-text:nth-child(5) {
+    top: 400px;
+}
+
+a.listing-vertical-text:nth-child(6) {
+    top: 500px;
+}
+
+a.listing-vertical-text:nth-child(7) {
+    top: 600px;
+}
+
+a.listing-vertical-text:nth-child(8) {
+    top: 700px;
+}
+
+a.listing-vertical-text:nth-child(9) {
+    top: 800px;
+}
+
+a.listing-vertical-text:nth-child(10) {
+    top: 900px;
+}
+
+a.listing-vertical-text:nth-child(11) {
+    top: 1000px;
+}
+
+a.listing-photo-tag,
+a.listing-photo-remove {
+    line-height: 25px;
+    opacity: 0;
+    padding: 0 20px;
+    position: relative;
+}
+
+a.listing-photo-tag:hover::after {
+    content: "Tag main image";
+    left: 10px;
+    position: absolute;
+    top: 15px;
+    width: 100px;
+}
+
+a.listing-photo-remove:hover::after {
+    content: "Remove image";
+    left: -53px;
+    position: absolute;
+    top: 15px;
+    width: 100px;
+}
+
+/* end-region */
+
+
+/* 5. Icons ------------------------------------------------------------------ start-region */
+
+.view-icon {
+    color: #fff;
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.view-icon:hover {
+    color: #3f95aa;
+}
+
+.search-icon {
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    font-size: 3rem;
+    height: 90px;
+    line-height: 90px;
+    margin-right: 35px;
+    width: 45px;
+}
+
+
+/* end-region */
+
+
+/* 6. Footer ----------------------------------------------------------------- start-region */
+
+ul.footer-link-list {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+ul.footer-link-list li {
+    color: #fff;
+    display: list-item;
+    line-height: 20px;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+a.footer-link,
+.social-media-link {
+    color: #fff;
+}
+
+a.footer-link:hover,
+.social-media-link:hover {
+    color: #3f95aa;
+}
+
+.social-media-link {
+    margin-right: 20px;
+    line-height: 60px;
+}
+
+/* end-region */

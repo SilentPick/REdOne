@@ -1,0 +1,382 @@
+/*
+
+1. Import fonts
+
+2. CSS reset styles
+
+3. Font sizes
+
+4. General styles
+
+5. Results page fonts
+
+6. Register login text
+
+7. Profile pages
+
+8. Home page
+
+9. Ad creation
+
+*/
+
+
+/* 1. Import fonts ------------------------------------------------- start-region */
+@font-face {
+    font-family: 'Raleway';
+    src: url('../fonts/raleway-regular-webfont.woff2') format('woff2'),
+    url('../fonts/raleway-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Raleway-Bold';
+    src: url('../fonts/raleway-bold-webfont.woff2') format('woff2'),
+    url('../fonts/raleway-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Raleway-Bolder';
+    src: url('../fonts/raleway-extrabold-webfont.woff2') format('woff2'),
+    url('../fonts/raleway-extrabold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* end-region */
+
+/* 2. CSS reset styles --------------------------------------------- start-region */
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    font-size: 1.2em;
+    /* currently ems cause chrome bug misinterpreting rems on body element */
+    font-weight: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: normal;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 2.3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+h4 {
+    font-size: 1.4rem;
+}
+
+h5 {
+    font-size: 1.2rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+p {
+    margin-top: 0;
+}
+
+/* -- end-region  */
+
+/* 3. Font sizes --------------------------------------------------- start-region  */
+
+.type10 {
+    font-size: 1rem;
+}
+
+.type11,
+.pagination-number.pagination-icon {
+    font-size: 1.1rem;
+}
+
+.type12 {
+    font-size: 1.2rem;
+}
+
+.type13,
+.sidebar-tab-text {
+    font-size: 1.3rem;
+}
+
+
+.type14,
+.ad-details-text {
+    font-size: 1.4rem;
+}
+
+.type16 {
+    font-size: 1.6rem;
+}
+
+.type18 {
+    font-size: 1.8rem;
+}
+
+.type20 {
+    font-size: 2rem;
+}
+
+.type25 {
+    font-size: 2.5rem;
+}
+
+.type30 {
+    font-size: 3rem;
+}
+
+.type35 {
+    font-size: 3.5rem;
+}
+
+.bold {
+    font-family: "Raleway-Bold", sans-serif;
+    font-weight: normal;
+}
+
+.bolder {
+    font-family: "Raleway-Bolder", sans-serif;
+    font-weight: normal;
+}
+
+/* -- end-region  */
+
+/* 4. General styles ----------------------------------------------- start-region  */
+
+.body-text {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+
+.small-text {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+}
+
+.subtitle {
+    font-size: 2rem;
+    margin-top: 25px;
+}
+
+.subtitle.red {
+    color: #cc0c2f;
+}
+
+.dual-color {
+  color:#000153;
+  display:inline-block;
+  margin: 20px auto 40px auto;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.dual-color::after,
+.dual-color::before{
+  border-radius:5px;
+  bottom: -5px;
+  content:"";
+  height:0px;
+  left: 0;
+  margin:auto;
+  position: absolute;
+  right: 0;
+}
+
+.dual-color::before{
+  width:75%;
+  border-bottom:1px solid #000153;
+}
+.dual-color::after{
+  width:30%;
+  border-bottom:3px solid #cc0c2f;
+  bottom:-6px;
+}
+
+.dual-color span {
+    color: #cc0c2f;
+}
+
+/* end-region */
+
+/* 5. Results page fonts ------------------------------------------- start-region  */
+
+span.title-text {
+    color: #000153;
+    display: inline-block;
+    font-size: 1.8rem;
+    line-height: 23px;
+    margin: 0;
+    padding: 0 15px;
+    vertical-align: middle;
+}
+
+span.location-text {
+    display: block;
+    color: #3f95aa;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: 0 15px 10px 15px;
+    text-align: left;
+}
+
+.list.location-text {
+    color: #000153;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.photo-counter {
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0 5px;
+}
+
+span.ad-price-text {
+    color: #fff;
+    font-size: 1.6rem;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.pagination-number {
+    font-size: 1.6rem;
+}
+
+.list-price-text {
+    color: #cc0c2f;
+    display: block;
+    padding: 20px 0 10px 0;
+    text-align: center;
+}
+
+/* end-region */
+
+/* 6. Register login text ------------------------------------------ start-region  */
+
+.register-white-text {
+    color: #fff;
+    padding: 10px 25px 10px 25px;
+}
+
+.subtitle-login-page {
+    padding-top: 70px;
+}
+
+.subtitle-register-page {
+    padding-top: 25px;
+}
+
+.site-terms {
+    line-height: 18px;
+    margin: 10px auto 20px auto;
+    padding-bottom: 10px;
+    width: 85%;
+}
+
+.id-definition-text {
+    font-size: 1.4rem;
+    line-height: 18px;
+    margin: 10px auto;
+    text-align: left;
+    width: 85%;
+}
+
+@media (max-width: 800px) {
+
+    .register-white-text {
+        padding: 0;
+    }
+
+}
+
+/* end-region */
+
+/* 7. Profile pages ------------------------------------------------ start-region */
+
+span.wislist-title-text {
+    color: #000153;
+    display: inline-block;
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* end-region */
+
+/* 8. Home page ---------------------------------------------------- start-region */
+
+.submenu-tag {
+    background: #fff;
+    border-radius: 10px 0 0 0;
+    height: 80px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+/*    top: -25px;*/
+    width: 140px;
+}
+
+/* end-region */
+
+/* 9. Ad creation -------------------------------------------------- start-region */
+
+.listing-10x {
+    left: -40px;
+    position: absolute;
+    top: 65px;
+}
+
+.listing-warning-text {
+    margin: 10px;
+}
+
+.service-prices {
+    color: #cc0c2f;
+    margin: 20px auto;
+    position: relative;
+    width: 110px;
+}
+
+.service-prices span {
+    position: relative;
+    top: -13px;
+}
+
+.listing-congratulations {
+    color: #cc0c2f;
+    margin-bottom: 25px;
+}
+
+.key-features {
+    animation: typeAnim 10s steps(99);
+    animation-fill-mode: forwards;
+    color: #fff;
+    padding: 15px;
+    margin: auto;
+}
+
+/* end-region */

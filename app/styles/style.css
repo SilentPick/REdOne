@@ -1,0 +1,260 @@
+@import "type.css";
+
+@import "buttons.css";
+
+@import "forms.css";
+
+@import "nav-links.css";
+
+@import "layout.css";
+
+@import "tables.css";
+
+@import "media-queries.css";
+
+/* Base styles ---------------------------------------------------------- start-region  */
+html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: #eeeaf7 url("../media/bg-pattern.png") repeat;
+    color: #000153;
+    font-family: "Raleway", sans-serif;
+    font-size: 1.2em;
+    /* currently ems cause chrome bug misinterpreting rems on body element */
+    font-weight: normal;
+    min-height: 100%;
+    margin: 0;
+    position: relative;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 130px;
+    /* Footer's height */
+}
+
+/* Clearing
+––––––––––––––––––––––––––––––––––––––––––––––---------------------–––– */
+
+
+/* Self Clearing Goodness */
+
+.u-cf {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+/* end-region */
+
+/* Utilities ---------------------------------------------------------- start-region */
+
+.fl-left {
+    float: left;
+}
+
+.fl-right {
+    float: right;
+}
+
+hr.solid {
+    border: 0;
+    border-bottom: 1px solid #000153;
+    width: 100%;
+}
+
+hr.dashed {
+    border: 0;
+    border-bottom: 1px dashed #4ec6de;
+    width: 88%;
+}
+
+hr.dashed-full {
+    border: 0;
+    border-bottom: 1px dashed #4ec6de;
+    width: 100%;
+}
+
+.shadow,
+.direction-buttons {
+    box-shadow: 0 1px 8px rgba(0, 1, 83, 0.3);
+/*    box-shadow: 0 1px 8px #c2bccf;*/
+}
+
+/* rounded corners */
+.rounded-corners,
+.grid-item,
+.list-item,
+.sidebar-bg,
+.view-options {
+    border-radius: 10px;
+}
+
+/* full circle corners */
+.direction-buttons,
+.pagination-container,
+.chips li {
+    border-radius: 100px;
+}
+
+/*  Tommy Blue*/
+.blue-bg,
+#main-header,
+#main-footer,
+select.view-select,
+.refiners-alt,
+.view-options,
+.sidebar-tab,
+input.header-search {
+    background-color: #000153;
+}
+
+/*    Red */
+.red-bg,
+.ad-price {
+    background-color: #cc0c2f;
+}
+
+/* white */
+.white-bg,
+.grid-item,
+.sidebar-bg,
+.pagination-container {
+    background-color: #fff;
+}
+
+.pad-left {
+    padding-left: 15px;
+}
+
+.pad-right {
+    padding-right: 15px;
+}
+
+.vertical-margin {
+    margin-top:15px;
+    margin-bottom: 15px;
+}
+
+.bot-margin {
+    margin-bottom: 15px;
+}
+
+.register-checksign {
+    display: block;
+    font-size: 5rem;
+    margin-top: 20px;
+    padding-top: 30px;
+}
+
+.advert-submit-checksign {
+    display: block;
+    font-size: 5rem;
+    margin: 0 auto 15px auto;
+}
+
+.graph {
+    width: 100%;
+    height: auto;
+}
+
+/*end-region*/
+
+/* Icons --------------------------------------------------- start-region */
+
+input#mobile-navigation {
+    display: none;
+/*    clear: both*/
+}
+
+input:checked + label + ul#mobile-navigation-list {
+    display: block
+}
+
+.mobile-icon-container {
+    display: none;
+    height: 90px;
+    line-height: 110px;
+    margin-left: 30px;
+}
+
+#mobile-icon-buton {
+    margin-top: 30px;
+    padding: 0 5px;
+}
+
+#mobile-icon-buton:hover div {
+    background: #3f95aa;
+}
+            
+#mobile-icon-buton div {
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    margin: 7px auto;
+    transition: all .4s
+}
+            
+/*             x */
+        
+            input:checked + label #mobile-icon-buton div:first-child {
+                transform: translate(0,10px) rotate(45deg)
+            }
+            input:checked + label #mobile-icon-buton div:last-child {
+                transform: translate(0,-10px) rotate(-45deg)
+            }
+            input:checked + label #mobile-icon-buton div:nth-child(2) {
+                transform: scale(0)
+            }
+
+@media (max-width: 1019px) {
+    
+    .mobile-icon-container {
+        display: inherit;
+    }
+    
+}
+
+.home-search-icon {
+    position: absolute;
+    stroke: #fff;
+    top: 5px;
+}
+
+.home-search-icon.search-active {
+    stroke: #000153;
+}
+
+/* Search icon vector shapes */
+.cls-1, .cls-2 {
+      fill: none;
+      stroke-width: 2px;
+    }
+
+.cls-2 {
+      fill-rule: evenodd;
+    }
+
+/* Wishlist icon */
+.fa.fa-map-o.wishlist {
+    -ms-transform: rotate(75deg); /* IE 9 */
+    -webkit-transform: rotate(75deg); /* Chrome, Safari, Opera */
+    transform: rotate(75deg);
+}
+
+/* Product page social icons */
+
+.product-social {
+    font-size: 2.5rem;
+    padding: 10px 10px;
+}
+
+.product-social:hover {
+    color: #cc0c2f;
+}
+
+/*end-region*/

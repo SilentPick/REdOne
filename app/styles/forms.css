@@ -1,0 +1,526 @@
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––-------------------– */
+
+/*  1. CSS resets
+
+    2. Base styles (for label, input, remove select arrow)
+
+    3. Header
+
+    4. Results page
+
+    5. Login and Register forms
+
+    6. Profile pages
+
+    7. Create ad pages
+
+*/
+
+/* 1. CSS resets --------------------------------------------------- start-region  */
+
+label {
+    display: inline-block;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+    background-color: #fff;
+    border: 1px solid #3f95aa;
+    border-radius: 10px;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #000153;
+}
+
+
+/* Removes awkward default styles on some inputs for iOS __________________________________________ */
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    border: 1px solid #3f95aa;
+    min-height: 65px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #000153;
+    outline: 0;
+}
+
+input[type="email"]::placeholder,
+input[type="number"]::placeholder,
+input[type="search"]::placeholder,
+input[type="text"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="url"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+    color: #3f95aa;
+}
+
+/* end-region */
+
+/* 2. Base styles (for label, input, remove select arrow) ---------- start-region  */
+
+label[for] {
+    cursor: pointer;
+}
+
+label[for]:hover {
+    color: #cc0c2f;
+    cursor: pointer;
+}
+
+input.underline-input {
+    border: 0;
+    border-bottom: 1px solid #3f95aa;
+    border-radius: 0;
+    text-indent: 15px;
+}
+
+input.underline-input:focus {
+    border:0;
+    border-bottom: 1px solid #3f95aa;
+}
+
+input.underline-input::placeholder {
+    color: #3f95aa;
+}
+
+select.underline-select {
+    border: 0;
+    border-bottom: 1px solid #000153;
+    border-radius: 0;
+    cursor: pointer;
+    margin: 15px 0;
+    padding: 5px 0;
+    text-indent: 10px;
+    width: 85%;
+}
+
+textarea::placeholder {
+    color: #3f95aa;
+}
+
+/* remove select arrow */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+select option {
+    color: #000153;
+}
+
+/* remove arrow on IE */
+
+select::-ms-expand,
+select::-ms-expand,
+select::-ms-expand {
+    display: none;
+}
+
+/* end-region */
+
+/* 3. Header ------------------------------------------------------- start-region */
+
+input.header-search {
+    color: #fff;
+    font-family: "FontAwesome", "Raleway-Bold", "Verdana", sans-serif;
+    height: 30px;
+    margin: 30px 30px 0 30px;
+    text-align: right;
+    width: 400px;
+}
+
+input.header-search:focus {
+    border-bottom: 1px solid #3f95aa;
+}
+
+input.header-search:focus::placeholder{
+    color: #3f95aa;
+}
+
+input.header-search::placeholder {
+    color: #fff;
+    font-family: "FontAwesome", "Raleway-Bold", "Verdana", sans-serif;
+}
+
+input.home-search-input {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    color: #fff;
+    text-align: center;
+    text-indent: 50px;
+    width: 100%;
+}
+
+input.home-search-input:focus {
+    text-align: left;
+    border: 0;
+}
+
+input.home-search-input::placeholder {
+    color: #fff;
+    text-align: center;
+}
+
+input.home-search-input.search-active {
+    color: #000153;
+    border-bottom: 1px solid #000153;
+}
+
+input.home-search-input.search-active::placeholder {
+    color: #000153;
+}
+
+/* end-region */
+
+/* 4. Results page ------------------------------------------------- start-region  */
+
+input#alert-input {
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #3f95aa;
+    border-left: 0;
+    border-radius: 0;
+    color: #000153;
+    font-size: 1.4rem;
+    height: 25px;
+    margin: 10px 0 10px 10px;
+    width: 190px;
+}
+
+input#alert-input::placeholder {
+    color: #3f95aa;
+}
+
+select.category-select {
+    border-radius: 50px;
+    font-size: 1.4rem;
+    height: 25px;
+    margin: 15px;
+    padding: 0 0 0 10px;
+    width: 185px;
+}
+
+select.view-select {
+    border: 0;
+    border-bottom: 1px solid #3f95aa;
+    border-radius: 0;
+    color: #fff;
+    height: 17px;
+    margin: 0 0 0 5px;
+    padding: 0 0 0 5px;
+    width: 130px;
+}
+
+select.view-select option {
+    color: #fff;
+}
+
+/* end-region */
+
+/* 5. Login and Register forms ------------------------------------- start-region */
+
+.register-final-form input[type=text],
+.login-form input[type=text],
+.login-form input[type=password] {
+    margin: 25px 0 0 0;
+    width: 85%;
+}
+
+.login-form input[type=checkbox] {
+    margin-right: 5px;
+}
+
+.register-final-form input[type=submit],
+.login-form input[type=submit],
+.login-facebook,
+.login-twitter {
+    border: 0;
+    color: #fff;
+    display: block;
+    font-size: 1.4rem;
+    margin: 10px auto;
+    width: 85%;
+}
+
+.register-final-form input[type=submit] {
+    width: 50%;
+}
+
+.register-final-form input[type=submit],
+.login-form input[type=submit] {
+    background-color: #cc0c2f;
+}
+
+.register-final-form input[type=submit]:hover,
+.login-form input[type=submit]:hover {
+    background-color: #b00726;
+}
+
+.login-form div {
+    margin: 15px auto;
+    width: 80%;
+}
+
+select.contact-select {
+    margin: 15px 0;
+    padding: 8px 0;
+    text-indent: 10px;
+    width: 85%;
+}
+
+textarea.contact-textarea {
+    width: 85%;
+    height: 130px;
+}
+
+/* end-region */
+
+/* 6. Profile pages ------------------------------------------------ start-region */
+
+.profile-info-form {
+    padding-top: 15px;
+    margin: 20px auto;
+    width: 75%;
+}
+
+.profile-info-form .underline-input[type=text],
+.profile-info-form .underline-input[type=password]{
+    text-indent: 0;
+    width: 100%;
+    margin: 10px 0 30px 0;
+}
+
+.profile-info-form .underline-input[type=text]::placeholder,
+.profile-info-form .underline-input[type=password]::placeholder{
+    color: #3f95aa;
+}
+
+select.profile-select {
+    border: 0;
+    border-bottom: 1px solid #3f95aa;
+    border-radius: 0;
+    color: #3f95aa;
+    height: 25px;
+    margin: 10px 0 30px 0;
+    width: 100%;
+}
+
+select.profile-select option {
+    color: #000153;
+}
+
+input.profile-button {
+    color: #cc0c2f;
+    font-size: 1.6rem;
+    float: right;
+}
+
+input.profile-button:hover {
+    background-color: #cc0c2f;
+    border: 1px solid #cc0c2f;
+    color: #fff;
+}
+
+.submit-ticket-form {
+    width: 100%;
+    margin: 20 auto;
+}
+
+.submit-ticket-form input[type=text],
+.submit-ticket-form select {
+    border-radius: 10px;
+    font-size: 1.8rem;
+    height: 35px;
+}
+
+.submit-ticket-form input[type=text] {
+    margin: 15px 0 15px 0;
+    text-indent: 5px;
+    width: 62%;
+}
+
+.submit-ticket-form input[type=text]::placeholder {
+    text-indent: 5px;
+}
+
+.submit-ticket-form select {
+    width: 35%;
+    margin: 15px 0 15px 2%;
+}
+
+.submit-ticket-form textarea {
+    font-size: 1.8rem;
+    height: 200px;
+    padding: 5px;
+    width: 100%;
+}
+
+.ads-view-select {
+    border: 1px solid #fff;
+    border-radius: 0; 
+}
+
+.ads-view-select:focus {
+    border: 1px solid #fff;
+}
+
+/* end-region */
+
+/* 7. Create ad pages ---------------------------------------------- start-region */
+
+input.ad-title-input {
+    background-color: #eeeaf7;
+    display: inline-block;
+    height: 25px;
+    margin-bottom: 10px;
+    max-width: 600px;
+    padding: 10px;
+    text-indent: 0;
+    text-align: center;
+    width: 80%;
+}
+
+select.engine-size-select {
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+}
+
+input.currency-input,
+input.location-input {
+    border: 1px solid #000153;
+    border-left: 0;
+    color: #000153;
+    height: 28px;
+    line-height: 28px;
+    margin-bottom: 15px;
+    text-align: left;
+    text-indent: 5px;
+}
+
+input.currency-input {
+    border-right: 0;
+    width: 120px;
+}
+
+input.location-input {
+    border-radius: 0 10px 10px 0;
+    width: 255px;
+}
+
+.create-ad-input-sides,
+input.radio-input-suffix + label {
+    background: #3f95aa;
+    border: 1px solid #000153;
+    color: #fff;
+    display: inline-block;
+    height: 30px;
+    margin: 0;
+}
+
+select.create-ad-input-sides.side-right,
+select.create-ad-input-sides.side-left {
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    height: 32px;
+    position: relative;
+    top: -2px; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 5px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {  
+/* on webkit-based browsers (Chrome, Safari, etc.) */  
+    select.create-ad-input-sides.side-right,
+    select.create-ad-input-sides.side-left { top: -1px;  } 
+}
+
+select.create-ad-input-sides.side-right {
+    border-radius: 0 10px 10px 0;
+    width: 90px;
+}
+
+select.create-ad-input-sides.side-left {
+    border-radius: 10px 0 0 10px;
+    width: 50px;
+}
+
+div.create-ad-input-sides {
+    border-radius: 10px 0 0 10px;
+    width: 35px;
+}
+
+div.create-ad-input-sides span {
+    line-height: 30px;
+}
+
+input.radio-input-suffix {
+    display: none;
+}
+
+input.radio-input-suffix + label {
+    border-radius: 0;
+    border-right: 0;
+    cursor: pointer;
+    line-height: 30px;
+    width: 30px;
+}
+
+input.radio-input-suffix:last-of-type + label {
+    border-radius: 0 10px 10px 0;
+    border-right: 1px solid #000153;
+    width: 40px;
+}
+
+input.radio-input-suffix:checked + label {
+    background: #000153;
+}
+
+/* end-region */
