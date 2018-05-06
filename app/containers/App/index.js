@@ -19,6 +19,8 @@ import Footer from 'components/Footer';
 import RegistrationPage from 'containers/RegistrationPage/Registration';
 import LoginPage from 'containers/LoginPage/Login';
 import EmailConfirmed from 'containers/EmailConfirmed/EmailConfirmed';
+import ForgotPassword from 'containers/ForgotPassword/ForgotPassword';
+import NewPassword from 'containers/NewPassword/NewPassword';
 
 const AppWrapper = styled.div`
 
@@ -37,10 +39,10 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/Registration" component={RegistrationPage} />
-        <Route path="/emailConfirmed" component={EmailConfirmed} />
+        <Route path="/EmailConfirmed" component={EmailConfirmed} />
+        <Route path="/ForgotPassword" component={ForgotPassword} />
+        <Route path="/NewPassword" component={NewPassword} />
         <Route path="/Login" component={LoginPage} />
-        <Route path="/features" component={FeaturePage} />
-        <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
     </AppWrapper>
