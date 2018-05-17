@@ -142,6 +142,10 @@ input.header-search {
 
 .bot-margin {
     margin-bottom: 15px;
+    height: 100px;
+    width: 100px;
+    max-width: 60%;
+    max-height: 60%;
 }
 
 .register-checksign {
@@ -190,7 +194,7 @@ input:checked + label + ul#mobile-navigation-list {
 #mobile-icon-buton:hover div {
     background: #3f95aa;
 }
-            
+
 #mobile-icon-buton div {
     width: 30px;
     height: 3px;
@@ -198,9 +202,9 @@ input:checked + label + ul#mobile-navigation-list {
     margin: 7px auto;
     transition: all .4s
 }
-            
+
 /*             x */
-        
+
             input:checked + label #mobile-icon-buton div:first-child {
                 transform: translate(0,10px) rotate(45deg)
             }
@@ -212,11 +216,11 @@ input:checked + label + ul#mobile-navigation-list {
             }
 
 @media (max-width: 1019px) {
-    
+
     .mobile-icon-container {
         display: inherit;
     }
-    
+
 }
 
 .home-search-icon {

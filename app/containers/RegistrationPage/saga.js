@@ -9,20 +9,25 @@ export function* registration() {
   const password = yield select(makeSelectPassword());
   const repeatpassword = yield select(makeSelectRepeatPassword());
   const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/register';
+  const response = window.grecaptcha.getResponse();
 
-  try {
-    yield call(request, requestURL, {
-      method: 'post',
-      body: JSON.stringify({
-        name: username,
-        email,
-        password,
-        password2: repeatpassword,
-      }),
-    });
-    alert('everything okay');
-  } catch (err) {
-  //  yield put(repoLoadingError(err));
+  if (response !== '') {
+    try {
+      yield call(request, requestURL, {
+        method: 'post',
+        body: JSON.stringify({
+          name: username,
+          email,
+          password,
+          password2: repeatpassword,
+        }),
+      });
+      alert('everything okay, please, check your email');
+    } catch (err) {
+    //  yield put(repoLoadingError(err));
+    }
+  } else {
+    alert('try recaptcha');
   }
 }
 

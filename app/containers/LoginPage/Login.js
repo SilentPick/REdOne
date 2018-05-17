@@ -1,55 +1,158 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { OldSocialLogin as SocialLogin } from 'react-social-login';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import saga from './saga';
 import { changeUserName, changePassword, sendUserNameAndPass } from './actions';
 import { makeSelectUserName, makeSelectPassword } from './selectors';
+import history from '../app';
 import reducer from './reducer';
+import messages from './messages';
 
 import '../../styles/forms.css';
-import '../../styles/layout.css';
 import '../../styles/style.css';
-import '../../styles/nav-links.css';
-import '../../styles/type.css';
-import '../../styles/normalize.css';
 import '../../styles/buttons.css';
-import '../../styles/tables.css';
-import '../../styles/media-queries.css';
 
 class Login extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  handleSocialLogin = () => {
+    history.push('/ForgotPassword'); // Have to change
+  };
+
   render() {
     return (
       <section id="page-small" className="u-cf">
         <div className="page-small-left-col blue-bg shadow rounded-corners">
           <div className="logo-login"></div>
-          <h3 className="register-white-text bold">Why register for RedOne account?</h3>
-          <p className="small-text register-white-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          <h3 className="register-white-text bold">
+            <FormattedMessage {...messages.leftBlockHeader} />
+          </h3>
+          <p className="small-text register-white-text">
+            <FormattedMessage {...messages.leftMainText} />
           </p>
-          <p className="small-text register-white-text">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
+          <p className="small-text register-white-text">
+            <FormattedMessage {...messages.leftFooter} />
+          </p>
         </div>
         <div className="page-small-right-col white-bg shadow rounded-corners">
           <ul className="tab-nav two-col bold shadow">
-            <li>Login</li>
-            <li>Register</li>
+            <Link to="/Login">
+              <li>
+                <FormattedMessage {...messages.loginTab} />
+              </li>
+            </Link>
+            <Link to="/Registration">
+              <li>
+                <FormattedMessage {...messages.registrationTab} />
+              </li>
+            </Link>
           </ul>
-          <h3 className="subtitle-login-page bold">Login with your existing account</h3>
-          <form onSubmit={this.props.userNameAndPassForm} name="login" className="login-form">
-            <input value={this.props.username} onChange={this.props.onChangeUserName} className="underline-input type16" type="text" name="username" placeholder="Username" />
-            <input value={this.props.password} onChange={this.props.onChangePassword} className="underline-input type16" type="password" name="password" placeholder="Password" />
+          <h3 className="subtitle-login-page bold">
+            <FormattedMessage {...messages.loginText} />
+          </h3>
+          <form
+            onSubmit={this.props.userNameAndPassForm}
+            name="login"
+            className="login-form"
+          >
+            <FormattedMessage {...messages.usernameInput}>
+              {(message) => (<input
+                value={this.props.username}
+                onChange={this.props.onChangeUserName}
+                className="underline-input type16"
+                type="text"
+                name="username"
+                placeholder={message}
+              />)}
+            </FormattedMessage>
+            <FormattedMessage {...messages.passwordInput}>
+              {(message) => (<input
+                value={this.props.password}
+                onChange={this.props.onChangePassword}
+                className="underline-input type16"
+                type="password"
+                name="password"
+                placeholder={message}
+              />)}
+            </FormattedMessage>
             <div className="u-cf">
-              <input type="checkbox" className="fl-left" id="remember" name="remember" value="remember" /><label htmlFor="remember" className="fl-left bold" >Remember me</label>
-              <a className="fl-right bold" href="forgot-password.html">Forgot password</a>
+              <input
+                type="checkbox"
+                className="fl-left"
+                id="remember"
+                name="remember"
+                value="remember"
+              />
+              <label
+                htmlFor="remember"
+                className="fl-left bold"
+              >
+                <FormattedMessage {...messages.rememberMe} />
+              </label>
+              <Link
+                to="/ForgotPassword"
+                className="fl-right bold"
+                href="forgot-password.html"
+              >
+                <FormattedMessage {...messages.forgotPass} />
+              </Link>
             </div>
-            <input className="bold" type="submit" name="login" value="Log in" />
+            <FormattedMessage {...messages.loginButton}>
+              {(message) => (<input
+                className="bold"
+                type="submit"
+                name="login"
+                value={message}
+              />)}
+            </FormattedMessage>
             <div className="linethrough bold">or</div>
-            <button className="login-facebook bold"><i className="fa fa-facebook type16 social-icon-login" aria-hidden="true"></i> Login with Facebook</button>
-            <button className="login-twitter bold type16"><i className="fa fa-twitter type16 social-icon-login" aria-hidden="true"></i>Login with Twitter</button>
-            <p className="site-terms type12">By accessing your account you are agreeing with our website’s <a className="bold">Terms and Conditions.</a></p>
           </form>
+          <SocialLogin
+            provider="facebook"
+            appId="950746635099026"
+            callback={this.handleSocialLogin}
+          >
+            <i
+              className="fa fa-facebook type16 social-icon-login"
+              aria-hidden="true"
+            >
+            </i>
+            <button
+              className="login-facebook bold"
+            >
+              <FormattedMessage {...messages.socialButtons} />
+              Facebook
+            </button>
+          </SocialLogin>
+          <SocialLogin
+            provider="google"
+            appId="353004601792-s5vg55h77u9i83eoa0ep79e9vh10tls5.apps.googleusercontent.com"
+            callback={this.handleSocialLogin}
+          >
+            <i
+              className="fa fa-twitter type16 social-icon-login"
+              aria-hidden="true"
+            >
+            </i>
+            <button
+              className="login-twitter bold type16"
+            >
+              <FormattedMessage {...messages.socialButtons} />
+              Google
+            </button>
+          </SocialLogin>
+          <p className="site-terms type12">
+            By accessing your account you are agreeing with our website’s
+            <a className="bold">
+              Terms and Conditions.
+            </a>
+          </p>
         </div>
       </section>
     );

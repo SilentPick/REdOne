@@ -30,6 +30,41 @@ input[type="radio"] {
     display: inline;
 }
 
+.react-datepicker__navigation{
+  height: auto;
+}
+
+.react-datepicker__input-container{
+  width: 100%;
+}
+
+.react-datepicker-wrapper{
+  width: 100%;
+}
+
+.g-recaptcha div div{
+  width: auto;
+}
+
+.datepicker::{
+  color: #3f95aa;
+}
+
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+
+
+
+.datepicker{
+  width: 80%;
+  margin-top: 10px;
+}
+
+.select-category{
+  cursor: pointer;
+}
+
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -44,7 +79,7 @@ select {
     border-radius: 10px;
     box-shadow: none;
     box-sizing: border-box;
-    color: #000153;
+    color: #3f95aa;
 }
 
 
@@ -274,6 +309,10 @@ select.view-select option {
     margin-right: 5px;
 }
 
+.BusinessName{
+  width: 80%;
+}
+
 .register-final-form input[type=submit],
 .login-form input[type=submit],
 .login-facebook,
@@ -305,11 +344,34 @@ select.view-select option {
     width: 80%;
 }
 
+.register-final-right-col input{
+  margin: 0;
+}
+
+.verify{
+  height: 23px;
+}
+
+.first-input{
+  width: 71%;
+}
+
+.description{
+    margin-top: 43px;
+    margin-bottom: 0px;
+    height: 126px;
+    text-indent: 15px;
+}
+
 select.contact-select {
     margin: 15px 0;
     padding: 8px 0;
     text-indent: 10px;
-    width: 85%;
+    width: 25%;
+}
+
+select.select-category {
+    text-indent: 16px;
 }
 
 textarea.contact-textarea {
@@ -401,7 +463,7 @@ input.profile-button:hover {
 
 .ads-view-select {
     border: 1px solid #fff;
-    border-radius: 0; 
+    border-radius: 0;
 }
 
 .ads-view-select:focus {
@@ -469,17 +531,17 @@ select.create-ad-input-sides.side-left {
     cursor: pointer;
     height: 32px;
     position: relative;
-    top: -2px; 
+    top: -2px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     padding: 5px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {  
-/* on webkit-based browsers (Chrome, Safari, etc.) */  
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+/* on webkit-based browsers (Chrome, Safari, etc.) */
     select.create-ad-input-sides.side-right,
-    select.create-ad-input-sides.side-left { top: -1px;  } 
+    select.create-ad-input-sides.side-left { top: -1px;  }
 }
 
 select.create-ad-input-sides.side-right {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -9,32 +10,56 @@ import saga from './saga';
 import { changeNewPassword, changeConfirmPassword, sendNewPass } from './actions';
 import { makeSelectNewPassword, makeSelectConfirmPassword } from './selectors';
 import reducer from './reducer';
+import messages from './messages';
 
 import '../../styles/forms.css';
-import '../../styles/layout.css';
 import '../../styles/style.css';
-import '../../styles/nav-links.css';
-import '../../styles/type.css';
-import '../../styles/normalize.css';
 import '../../styles/buttons.css';
-import '../../styles/tables.css';
-import '../../styles/media-queries.css';
 
 class NewPassword extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <section id="page-smallest" className="u-cf">
-   <div className="forgot-pass-container white-bg shadow rounded-corners">
-       <div className="logo-on-white"></div>
-       <p id="confirmation-text" className="body-text"><span>Please type in your new passowrd</span></p>
-       <form onSubmit={this.props.SendNewPassForm} name="reset-pass" className="login-form">
-            <input value={this.props.newpassword} onChange={this.props.onChangeNewPassword} className="underline-input type16" type="password" name="new-pass" placeholder="New password" />
-            <input value={this.props.confirmpassword} onChange={this.props.onChangeConfirmPassword} className="underline-input type16" type="password" name="confirm-pass" placeholder="Confirm password" />
+        <div className="forgot-pass-container white-bg shadow rounded-corners">
+          <div className="logo-on-white"></div>
+          <p id="confirmation-text" className="body-text">
+            <span>
+              <FormattedMessage {...messages.mainText} />
+            </span>
+          </p>
+          <form onSubmit={(e) => this.props.SendNewPassForm(e, this.props.match.params.token)} name="reset-pass" className="login-form">
+            <FormattedMessage {...messages.newpasswordInput}>
+              {(message) => (<input
+                value={this.props.newpassword}
+                onChange={this.props.onChangeNewPassword}
+                className="underline-input type16"
+                type="password"
+                name="new-pass"
+                placeholder={message}
+              />)}
+            </FormattedMessage>
+            <FormattedMessage {...messages.confirmpasswordInput}>
+              {(message) => (<input
+                value={this.props.confirmpassword}
+                onChange={this.props.onChangeConfirmPassword}
+                className="underline-input type16"
+                type="password"
+                name="confirm-pass"
+                placeholder={message}
+              />)}
+            </FormattedMessage>
             <br /><br />
-            <input className="bold" type="submit" name="reset-pass" value="Reset password" />
-        </form>
-   </div>
-</section>
+            <FormattedMessage {...messages.resetButton}>
+              {(message) => (<input
+                className="bold"
+                type="submit"
+                name="reset-pass"
+                value={message}
+              />)}
+            </FormattedMessage>
+          </form>
+        </div>
+      </section>
     );
   }
 }
@@ -49,9 +74,9 @@ NewPassword.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    SendNewPassForm: (evt) => {
+    SendNewPassForm: (evt, token) => {
       evt.preventDefault();
-      dispatch(sendNewPass());
+      dispatch(sendNewPass(token));
     },
     onChangeNewPassword: (evt) => dispatch(changeNewPassword(evt.target.value)),
     onChangeConfirmPassword: (evt) => dispatch(changeConfirmPassword(evt.target.value)),

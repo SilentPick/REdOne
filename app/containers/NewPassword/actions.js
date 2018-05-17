@@ -21,8 +21,9 @@ export function changeConfirmPassword(inputValue) {
   };
 }
 
-export function sendNewPass() {
+export function sendNewPass(token) {
   return {
     type: SEND_NEWPASS,
+    token,
   };
 }

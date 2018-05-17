@@ -1,23 +1,17 @@
 import { fromJS } from 'immutable';
-import { CHANGE_STREETADDRESS, CHANGE_DISTRICT, CHANGE_CITY, CHANGE_ID } from './constants';
+import { MEMBERSHIPS_LOADED, VERIFY_EMAIL } from './constants';
 
 const initialState = fromJS({
-  streetaddress: '',
-  district: '',
-  city: '',
-  id: '',
+  memberships: null,
+  verify: '',
 });
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_STREETADDRESS:
-      return state.set('streetaddress', action.inputValue);
-    case CHANGE_DISTRICT:
-      return state.set('district', action.inputValue);
-    case CHANGE_CITY:
-      return state.set('city', action.inputValue);
-    case CHANGE_ID:
-      return state.set('id', action.inputValue);
+    case MEMBERSHIPS_LOADED:
+      return state.set('memberships', action.res);
+    case VERIFY_EMAIL:
+      return state.set('verify', action.res);
     default:
       return state;
   }

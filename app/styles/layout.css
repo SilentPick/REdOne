@@ -1424,6 +1424,10 @@ div.sponsored-title-container {
     display: none;
 }
 
+.memberships-container{
+  width: 100%;
+}
+
 .membership-selection-container {
     width: 42%;
     padding: 0 2.5%;

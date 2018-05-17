@@ -1,5 +1,5 @@
-export const CHANGE_STREETADDRESS = 'boilerplate/EmailConfirmed/CHANGE_STREETADDRESS';
-export const CHANGE_DISTRICT = 'boilerplate/EmailConfirmed/CHANGE_DISTRICT';
-export const CHANGE_CITY = 'boilerplate/EmailConfirmed/CHANGE_CITY';
-export const CHANGE_ID = 'boilerplate/EmailConfirmed/CHANGE_ID';
-export const SEND_ADDITIONALDETAILS = 'boilerplate/EmailConfirmed/SEND_ADDITIONALDETAILS';
+export const CHANGE_FORMINPUT = 'boilerplate/EmailConfirmed/CHANGE_STREETADDRESS';
+export const MEMBERSHIPS_LOADED = 'boilerplate/EmailConfirmed/MEMBERSHIPS_LOADED';
+export const MEMBERSHIPS_LOAD = 'boilerplate/EmailConfirmed/MEMBERSHIPS_LOAD';
+export const VERIFY_EMAIL = 'boilerplate/EmailConfirmed/VERIFY_EMAIL';
+// export const LOAD_MEMBERSHIPS = 'boilerplate/EmailConfirmed/LOAD_MEMBERSHIPS';

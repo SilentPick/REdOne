@@ -1,4 +1,4 @@
-import { CHANGE_STREETADDRESS, CHANGE_DISTRICT, CHANGE_CITY, CHANGE_ID, SEND_ADDITIONALDETAILS } from './constants';
+import { CHANGE_FORMINPUT, MEMBERSHIPS_LOADED, MEMBERSHIPS_LOAD, VERIFY_EMAIL, VERIFY_LOADED } from './constants';
 
 /**
  * Changes the input field of the form
@@ -7,36 +7,29 @@ import { CHANGE_STREETADDRESS, CHANGE_DISTRICT, CHANGE_CITY, CHANGE_ID, SEND_ADD
  *
  * @return {object}    An action object with a type of CHANGE_USERNAME
  */
-export function changeStreetAddress(inputValue) {
+export function changeFormInput(inputValue) {
   return {
-    type: CHANGE_STREETADDRESS,
+    type: CHANGE_FORMINPUT,
     inputValue,
   };
 }
-
-export function changeDistrict(inputValue) {
+export function membershipsLoaded(res) {
+  console.log('action');
   return {
-    type: CHANGE_DISTRICT,
-    inputValue,
+    type: MEMBERSHIPS_LOADED,
+    res,
   };
 }
 
-export function changeCity(inputValue) {
+export function membershipsLoad() {
   return {
-    type: CHANGE_CITY,
-    inputValue,
+    type: MEMBERSHIPS_LOAD,
   };
 }
 
-export function changeId(inputValue) {
+export function verifyEmailLoad(token) {
   return {
-    type: CHANGE_ID,
-    inputValue,
-  };
-}
-
-export function sendAdditionalDetails() {
-  return {
-    type: SEND_ADDITIONALDETAILS,
+    type: VERIFY_EMAIL,
+    token,
   };
 }

@@ -11,6 +11,7 @@ const initialState = fromJS({
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_USERNAME:
+      console.log('reducer');
       return state.set('username', action.inputValue);
     case CHANGE_EMAIL:
       return state.set('email', action.inputValue);

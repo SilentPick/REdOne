@@ -8,6 +8,7 @@ import { CHANGE_USERNAME, CHANGE_EMAIL, CHANGE_PASSWORD, CHANGE_REPEATPASSWORD, 
  * @return {object}    An action object with a type of CHANGE_USERNAME
  */
 export function changeUsername(inputValue) {
+  console.log('changeUsername');
   return {
     type: CHANGE_USERNAME,
     inputValue,
