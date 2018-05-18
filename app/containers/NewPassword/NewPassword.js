@@ -12,10 +12,6 @@ import { makeSelectNewPassword, makeSelectConfirmPassword } from './selectors';
 import reducer from './reducer';
 import messages from './messages';
 
-import '../../styles/forms.css';
-import '../../styles/style.css';
-import '../../styles/buttons.css';
-
 class NewPassword extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (

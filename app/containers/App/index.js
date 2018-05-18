@@ -17,6 +17,15 @@ import LoginPage from 'containers/LoginPage/Login';
 import EmailConfirmed from 'containers/EmailConfirmed/EmailConfirmed';
 import ForgotPassword from 'containers/ForgotPassword/ForgotPassword';
 import NewPassword from 'containers/NewPassword/NewPassword';
+import Memberships from 'containers/Memberships/Memberships';
+
+import '../../styles/forms.css';
+import '../../styles/layout.css';
+import '../../styles/style.css';
+import '../../styles/type.css';
+import '../../styles/buttons.css';
+import '../../styles/tables.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const AppWrapper = styled.div`
 
@@ -39,6 +48,8 @@ export default function App() {
           <Route path="/ForgotPassword" component={ForgotPassword} />
           <Route path="/reset-password/:token" component={NewPassword} />
           <Route path="/Login" component={LoginPage} />
+          <Route path="/Memberships" component={Memberships} />
+          <Route path="/" component={LoginPage} />
         </Switch>
         {/* <Footer />*/}
       </AppWrapper>

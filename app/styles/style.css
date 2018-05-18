@@ -94,6 +94,10 @@ hr.dashed-full {
     border-radius: 10px;
 }
 
+.email-confirm-container{
+  width: 100%;
+}
+
 /* full circle corners */
 .direction-buttons,
 .pagination-container,

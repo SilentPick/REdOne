@@ -1,5 +1,6 @@
 import { call, select, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
+import { saveCookie } from 'utils/cookie'
 import { makeSelectUserName, makeSelectPassword } from 'containers/LoginPage/selectors';
 import { SEND_USERNAMEANDPASS } from './constants';
 
@@ -9,16 +10,18 @@ export function* userNameAndPass() {
   const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/api/login';
 
   try {
-    yield call(request, requestURL, {
+    const res = yield call(request, requestURL, {
       method: 'post',
       body: JSON.stringify({
         username,
         password,
       }),
-    });
-    alert('everything okay');
+    })
+    saveCookie(res.access_token);
+    alert('everything okay')
   } catch (err) {
     alert('something wrong');
+    console.log('error', err)
   }
 }
 

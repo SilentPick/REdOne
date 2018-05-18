@@ -15,16 +15,18 @@ import { makeSelectUsername, makeSelectEmail, makeSelectPassword, makeSelectRepe
 import reducer from './reducer';
 import messages from './messages';
 import history from '../app';
-
-import '../../styles/forms.css';
-import '../../styles/style.css';
-import '../../styles/buttons.css';
+import request from 'utils/request';
 
 class Registration extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  handleSocialLogin = () => {
-    history.push('/ForgotPassword'); // Have to change
-  };
+  handleSocialLogin = (params) => {
+    request('http://redvalley.westeurope.cloudapp.azure.com/oauth', {
+      method: 'post',
+      body: JSON.stringify({
+        provider: params._provider,
+	      idToken: params._token.idToken
+      }),
+  })};
 
   render() {
     console.log('', this.props);
