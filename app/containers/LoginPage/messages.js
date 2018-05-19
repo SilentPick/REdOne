@@ -44,7 +44,7 @@ export default defineMessages({
   },
   socialButtons: {
     id: 'boilerplate.containers.LoginPage.login.tab',
-    defaultMessage: 'Login with',
+    defaultMessage: 'Login with ',
   },
   usernameInput: {
     id: 'boilerplate.containers.LoginPage.username.input',

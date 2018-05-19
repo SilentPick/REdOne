@@ -24,7 +24,7 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import saga from './saga';
-import { membershipsLoad, membershipsLoaded, changeFormInput, verifyEmailLoad } from './actions';
+import { verifyEmailLoad } from './actions';
 import { makeSelectMemberships, verifyEmail } from './selectors';
 import reducer from './reducer';
 import Membership from '../../components/Memberships';
@@ -222,7 +222,7 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
                     <TextField hintText="Message Field" floatingLabelText=" Business Description" multiLine rows={2} style={{ textAlign: 'left', height: '74px', width: '77%' }} />
                   </div>
               </div>
-                
+
                 <br /><br />
                 <p style={{ textAlign: 'center', fontSize: '20px', margin: 'auto' }}>Please subscribe for a membership</p>
                 <div style={{ height: '1px', width: '100%', background: 'grey' }} />

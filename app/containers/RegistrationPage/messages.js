@@ -36,7 +36,7 @@ export default defineMessages({
   },
   socialButtons: {
     id: 'boilerplate.containers.RegistratinoPage.social.button',
-    defaultMessage: 'Login with',
+    defaultMessage: 'Register with ',
   },
   fullnameInput: {
     id: 'boilerplate.containers.RegistratinoPage.fullname.input',

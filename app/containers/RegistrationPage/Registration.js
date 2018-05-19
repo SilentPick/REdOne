@@ -130,7 +130,7 @@ class Registration extends React.PureComponent { // eslint-disable-line react/pr
             </i>
             <button className="login-facebook bold">
               <FormattedMessage {...messages.socialButtons} />
-              Facebook
+               Facebook
             </button>
           </SocialLogin>
           <SocialLogin
