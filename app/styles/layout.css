@@ -1429,7 +1429,9 @@ div.sponsored-title-container {
 }
 
 .membership-selection-container {
-    width: 42%;
+    width: 50%;
+    max-width: 100%;
+    min-width: 25%;
     padding: 0 2.5%;
     border-left: 1px solid #000153;
 }

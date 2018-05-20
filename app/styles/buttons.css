@@ -1,6 +1,6 @@
 /* Buttons ________________________________________________________________ */
 
-/* 
+/*
 1. CSS Reset
 
 2. Custom buttons
@@ -81,6 +81,12 @@ input[type="button"]:focus {
     color: #fff;
 }
 
+.finish-button{
+  margin: auto;
+  clear: both;
+  margin-top: 20px;
+}
+
 .blue-button {
     background-color: #000153;
 }
@@ -142,12 +148,12 @@ button.white-toggle:hover {
 }
 
 .direction-buttons {
-    background: #faf9fd; 
+    background: #faf9fd;
     background: -webkit-linear-gradient(#faf9fd 0%, #faf9fd 18%, #eeeaf7 83%, #eeeaf7 100%);
     background: -o-linear-gradient(#faf9fd 0%, #faf9fd 18%, #eeeaf7 83%, #eeeaf7 100%);
-    background: linear-gradient(#faf9fd 0%, #faf9fd 18%, #eeeaf7 83%, #eeeaf7 100%); 
+    background: linear-gradient(#faf9fd 0%, #faf9fd 18%, #eeeaf7 83%, #eeeaf7 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf9fd', endColorstr='#eeeaf7',GradientType=0 ); /* IE6-9 */
-    
+
     display: table;
     height: 35px;
     position: absolute;
@@ -602,7 +608,7 @@ button.shop-button.fav-on i.fa::before {
     color: #cc0c2f;
     font-family: "Raleway-bold", sans-serif;
     font-size: 1.4rem;
-    left: 0; 
+    left: 0;
     position: absolute;
     right: 0;
     top: 345px;

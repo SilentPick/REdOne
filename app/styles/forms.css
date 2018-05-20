@@ -55,7 +55,6 @@ input[type="radio"] {
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
 
 
-
 .datepicker{
   width: 80%;
   margin-top: 10px;
@@ -301,8 +300,21 @@ select.view-select option {
 .register-final-form input[type=text],
 .login-form input[type=text],
 .login-form input[type=password] {
-    margin: 25px 0 0 0;
-    width: 85%;
+    margin-top: 8px;
+    width: 80%;
+}
+
+div.react-file-reader-button{
+  width: 77%;
+  margin: auto;
+}
+
+input.underline-input {
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.3);
+    text-indent: 0px;
+    border-radius: 0;
 }
 
 .login-form input[type=checkbox] {

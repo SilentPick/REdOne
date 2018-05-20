@@ -24,14 +24,14 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import saga from './saga';
-import { verifyEmailLoad } from './actions';
-import { makeSelectMemberships, verifyEmail } from './selectors';
+import { membershipsLoad, changeUserType } from './actions';
+import { makeSelectMemberships, userType } from './selectors';
 import reducer from './reducer';
 import Membership from '../../components/Memberships';
 
 const style = {
-  margin: 12,
-  width: '77%',
+  marginTop: 12,
+  width: '100%',
 };
 
 const styles = {
@@ -52,7 +52,6 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
   }
 
   componentDidMount() {
-    this.props.verifyEmailLoad(this.props.match.params.token);
     this.props.membershipsLoad();
   }
 
@@ -148,110 +147,175 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
       <th Name="tg-yw4l">Opening Time</th>
       <th className="tg-yw4l">Closing Time</th>
     </tr>
-
-
     {this.renderTableRows()}
   </table>)
+
+  renderBusiness =() => (
+    <div>
+      <div className="register-final-table">
+        <div className="register-final-left-col">
+          <TextField hintText="Name" style={{ width: '80%' }} />
+          <TextField hintText="Phone number" style={{ width: '50%', verticalAlign: 'middle' }} />
+          <RaisedButton label="Verify" style={{ width: '30%' }} />
+          {this.renderTable()}
+        </div>
+        <div className="register-final-right-col">
+          <TextField hintText="Business Name" style={{ width: '77%' }} />
+          <TextField hintText="Business Contact Number" style={{ width: '77%' }} />
+          <br />
+          {this.file
+            ? <ReactFileReader handleFiles={this.handleFiles}>
+                <FileImage width="300" height="200" file={this.file} />
+              </ReactFileReader>
+            : <ReactFileReader handleFiles={this.handleFiles}>
+                <img />
+                <RaisedButton label="Choose Business Logo" style={style} />
+              </ReactFileReader>
+          }
+          {this.fileImage
+            ? <ReactFileReader handleFiles={this.handleFilesImage}>
+                <FileImage width="300" height="200" file={this.fileImage} />
+              </ReactFileReader>
+            : <ReactFileReader handleFiles={this.handleFilesImage}>
+                <img />
+                <RaisedButton label="Choose Business Image" style={style} />
+              </ReactFileReader>
+          }
+          <TextField hintText="City" style={{ width: '77%' }} />
+          <TextField hintText="Message Field"
+            floatingLabelText=" Business Description"
+            multiLine
+            rows={2}
+            style={{ textAlign: 'left', height: '74px', width: '77%' }}
+          />
+        </div>
+      </div>
+      <br />
+      <br />
+      <p style={{ textAlign: 'center', fontSize: '20px', margin: 'auto', marginTop: '50px' }}>
+        Please subscribe for a membership
+      </p>
+      <div style={{ height: '1px', width: '100%', background: 'grey', marginBottom: '30px', marginTop: '5px' }} />
+      <div className="memberships-container">
+        {this.renderMemberships()}
+      </div>
+    </div>
+  )
+
+  renderRegularUser = () => (
+    <div className="register-final-table">
+      <div className="register-final-left-col">
+        <TextField hintText="Name" style={{ width: '80%' }} />
+        <TextField hintText="Phone number" style={{ width: '50%', verticalAlign: 'middle' }} />
+        <RaisedButton label="Verify"
+          style={{ width: '30%' }}
+        />
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+          className="underline-input type16 datepicker"
+          style={{width: '110%', margin: 'auto'}}
+          type="picker"
+          name="birthday"
+          placeholder="Birthday"
+        />
+        <TextField
+          hintText="City"
+          style={{ width: '80%' }}
+        />
+      </div>
+      <div className="register-final-right-col">
+        <TextField
+          hintText="ID"
+          style={{ width: '77%' }}
+        />
+        {this.file
+          ? <ReactFileReader
+              handleFiles={this.handleFiles}
+            >
+              <FileImage
+                width="300"
+                height="200"
+                file={this.file}
+              />
+            </ReactFileReader>
+          : <ReactFileReader
+              handleFiles={this.handleFiles}
+            >
+              <img className="create-wedding__image" />
+              <RaisedButton
+                label="Choose Profile Picture"
+                style={style}
+              />
+            </ReactFileReader>
+        }
+        {this.fileImage
+          ? <ReactFileReader
+              handleFiles={this.handleFilesImage}
+            >
+              <FileImage
+                width="300"
+                height="200"
+                file={this.fileImage}
+              />
+            </ReactFileReader>
+          : <ReactFileReader
+              handleFiles={this.handleFilesImage}
+            >
+              <img className="create-wedding__image" />
+              <RaisedButton
+                label="Choose Baner Image"
+                style={style}
+              />
+            </ReactFileReader>
+        }
+      </div>
+    </div>
+  )
 
   render(){
     return(
       <section id="page-small" className="u-cf">
-        <form name="register-final" className="register-final-form">
+        <form
+          name="register-final"
+          className="register-final-form"
+        >
           <div className="page-small-single-col white-bg shadow rounded-corners u-cf email-confirm-container">
-            <form onSubmit={this.props.EmailConfirmedForm} name="register-final" >
-                <h3 className="vertical-padding bold">Please provide us with a few additional details.</h3>
-                <SelectField floatingLabelText="Select User Type" style={{ textAlign: 'left' }} value={this.state.value} onChange={this.handleChange} name="category" className="contact-select type14 select-category">
-                <MenuItem value={1} primaryText="Regular User" />
-                <MenuItem value={2} primaryText="Business" />
+            <form
+              onSubmit={this.props.EmailConfirmedForm}
+              name="register-final"
+            >
+              <h3
+                className="vertical-padding bold"
+              >
+                Please provide us with a few additional details.
+              </h3>
+              <SelectField
+                value={this.props.userType}
+                onChange={this.props.changeUserType}
+                floatingLabelText="Select User Type"
+                style={{ textAlign: 'left' }}
+                name="category"
+                className="contact-select type14 select-category">
+                  <MenuItem value={1} primaryText="Regular User" />
+                  <MenuItem value={2} primaryText="Business" />
               </SelectField>
-                <div className="register-final-table">
-                <div className="register-final-left-col">
-                    <TextField hintText="Name" style={{ width: '80%' }} />
-                    <TextField hintText="Phone number" style={{ width: '50%' }} />
-                    <RaisedButton label="Verify" primary style={{ width: '30%' }} />
-                    <DatePicker selected={this.state.startDate} onChange={this.handleChange} className="underline-input type16 datepicker" type="text" name="birthday" placeholder="Birthday" />
-                    <TextField hintText="City" style={{ width: '80%' }} />
-                  </div>
-                <div className="register-final-right-col">
-                    <TextField hintText="ID" style={{ width: '77%' }} />
-                    {this.file
-                    ? <ReactFileReader handleFiles={this.handleFiles}><FileImage width="300" height="200" file={this.file} /></ReactFileReader>
-                    : <ReactFileReader handleFiles={this.handleFiles}>
-                      <img className="create-wedding__image" />
-                      <RaisedButton label="Choose Profile Picture" style={style} />
-                    </ReactFileReader>
-                  }
-                    {this.fileImage
-                    ? <ReactFileReader handleFiles={this.handleFilesImage}><FileImage width="300" height="200" file={this.fileImage} /></ReactFileReader>
-                    : <ReactFileReader handleFiles={this.handleFilesImage}>
-                      <img className="create-wedding__image" />
-                      <RaisedButton label="Choose Baner Image" style={style} />
-                    </ReactFileReader>
-                  }
-                  </div>
-              </div>
-                <div className="register-final-table">
-                <div className="register-final-left-col">
-                    <TextField hintText="Name" style={{ width: '80%' }} />
-                    <TextField hintText="Phone number" style={{ width: '50%' }} />
-                    <RaisedButton label="Verify" primary style={{ width: '30%' }} />
-                    {this.renderTable()}
-                  </div>
-                <div className="register-final-right-col">
-                    <TextField hintText="Business Name" style={{ width: '77%' }} />
-                    <TextField hintText="Business Contact Number" style={{ width: '77%' }} /><br />
-                    {this.file
-                    ? <ReactFileReader handleFiles={this.handleFiles}>
-                      <FileImage width="300" height="200" file={this.file} />
-                    </ReactFileReader>
-                    : <ReactFileReader handleFiles={this.handleFiles}>
-                      <img />
-                      <RaisedButton label="Choose Business Logo" style={style} />
-                    </ReactFileReader>
-                  }
-                    {this.fileImage
-                    ? <ReactFileReader handleFiles={this.handleFilesImage}>
-                      <FileImage width="300" height="200" file={this.fileImage} />
-                    </ReactFileReader>
-                    : <ReactFileReader handleFiles={this.handleFilesImage}>
-                      <img />
-                      <RaisedButton label="Choose Business Image" style={style} />
-                    </ReactFileReader>
-                  }
-                    <TextField hintText="City" style={{ width: '77%' }} />
-                    <TextField hintText="Message Field" floatingLabelText=" Business Description" multiLine rows={2} style={{ textAlign: 'left', height: '74px', width: '77%' }} />
-                  </div>
-              </div>
-
-                <br /><br />
-                <p style={{ textAlign: 'center', fontSize: '20px', margin: 'auto' }}>Please subscribe for a membership</p>
-                <div style={{ height: '1px', width: '100%', background: 'grey' }} />
-                <div className="memberships-container">
-                {this.renderMemberships()}
-              </div>
-                <input className="bold" type="submit" name="login" value="Finish" />
-              </form>
-            </div>
-          </form>
-        </section>
+              {this.props.userType === 1 && this.renderRegularUser()
+              }
+              {this.props.userType === 2 && this.renderBusiness()
+              }
+              {this.props.userType !== null && <input className="bold finish-button" type="submit" name="login" value="Finish" />}
+            </form>
+          </div>
+        </form>
+      </section>
     )
   }
 }
 
-
 Memberships.propTypes = {
-  // onChangeStreetAddress: PropTypes.func,
-  // onChangeDistrict: PropTypes.func,
-  // EmailConfirmedForm: PropTypes.func,
-  // onChangeCity: PropTypes.func,
-  // onChangeId: PropTypes.func,
-  // streetaddress: PropTypes.string,
-  // district: PropTypes.string,
-  // city: PropTypes.string,
-  // id: PropTypes.string,
   memberships: PropTypes.object,
-  response: PropTypes.object,
-  emailVerify: PropTypes.string,
+  userType: PropTypes.number,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -261,13 +325,14 @@ export function mapDispatchToProps(dispatch) {
     //   dispatch(sendAdditionalDetails());
     // },
     membershipsLoad: () => dispatch(membershipsLoad()),
-    verifyEmailLoad: (token) => dispatch(verifyEmailLoad(token)),
+    changeUserType: (a, b, value) => dispatch(changeUserType(value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   memberships: makeSelectMemberships(),
-  emailVerify: verifyEmail(),
+  userType: userType(),
+
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

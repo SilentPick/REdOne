@@ -2,7 +2,7 @@ import React from 'react';
 import renderHTML from 'react-render-html';
 import PropTypes from 'prop-types';
 import request from 'utils/request';
-import { getCookie } from 'utils/cookie'
+import { getToken } from 'utils/localStorage'
 
 import '../../styles/style.css';
 import '../../styles/normalize.css';
@@ -24,7 +24,7 @@ class Membership extends React.Component { // eslint-disable-line react/prefer-s
             className="listing-btn type16 bold u-cf" onClick={() => {
               request('http://redvalley.westeurope.cloudapp.azure.com/paymember', {
                 headers: {
-                  Authorization: 'Bearer ' + getCookie(),
+                  Authorization: 'Bearer ' + getToken(),
                 },
                 method: 'post',
                 body: JSON.stringify({

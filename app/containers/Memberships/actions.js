@@ -1,4 +1,4 @@
-import { CHANGE_FORMINPUT, MEMBERSHIPS_LOADED, MEMBERSHIPS_LOAD, VERIFY_EMAIL, VERIFY_LOADED } from './constants';
+import { CHANGE_FORMINPUT, MEMBERSHIPS_LOADED, MEMBERSHIPS_LOAD, VERIFY_EMAIL, USER_TYPE } from './constants';
 
 /**
  * Changes the input field of the form
@@ -27,9 +27,9 @@ export function membershipsLoad() {
   };
 }
 
-export function verifyEmailLoad(token) {
+export function changeUserType(inputValue) {
   return {
-    type: VERIFY_EMAIL,
-    token,
+    type: USER_TYPE,
+    inputValue,
   };
 }

@@ -25,7 +25,7 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import saga from './saga';
 import { membershipsLoad, membershipsLoaded, changeFormInput, verifyEmailLoad } from './actions';
-import { makeSelectMemberships, verifyEmail } from './selectors';
+import { verifyEmail } from './selectors';
 import reducer from './reducer';
 
 class EmailConfirmed extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

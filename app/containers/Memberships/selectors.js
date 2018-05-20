@@ -7,7 +7,7 @@ export const makeSelectMemberships = () => createSelector(
   (emailconfirmedState) => emailconfirmedState.get('memberships')
 );
 
-export const verifyEmail = () => createSelector(
+export const userType = () => createSelector(
   selectEmailConfirmed,
-  (emailconfirmedState) => emailconfirmedState.get('verify')
+  (emailconfirmedState) => emailconfirmedState.get('usertype')
 );

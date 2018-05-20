@@ -1,6 +1,6 @@
 import { call, select, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { saveCookie } from 'utils/cookie'
+import { saveToken } from 'utils/localStorage'
 import { makeSelectUserName, makeSelectPassword } from 'containers/LoginPage/selectors';
 import { SEND_USERNAMEANDPASS } from './constants';
 
@@ -17,7 +17,7 @@ export function* userNameAndPass() {
         password,
       }),
     })
-    saveCookie(res.access_token);
+    saveToken(res.access_token);
     alert('everything okay')
   } catch (err) {
     alert('something wrong');
