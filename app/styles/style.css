@@ -96,6 +96,7 @@ hr.dashed-full {
 
 .email-confirm-container{
   width: 100%;
+  min-height: 200px;
 }
 
 /* full circle corners */

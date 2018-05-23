@@ -1,8 +1,10 @@
 import { call, select, takeLatest } from 'redux-saga/effects';
+import {toastr} from 'react-redux-toastr/lib'
 import request from 'utils/request';
 import { saveToken } from 'utils/localStorage'
 import { makeSelectUserName, makeSelectPassword } from 'containers/LoginPage/selectors';
 import { SEND_USERNAMEANDPASS } from './constants';
+import { history } from 'app';
 
 export function* userNameAndPass() {
   const username = yield select(makeSelectUserName());
@@ -17,11 +19,14 @@ export function* userNameAndPass() {
         password,
       }),
     })
-    saveToken(res.access_token);
-    alert('everything okay')
-  } catch (err) {
-    alert('something wrong');
-    console.log('error', err)
+    if (res.hasError){
+      toastr.error('Error!', res.errors["0"].message)
+    }else{
+      saveToken(res.access_token),
+      history.push("/Memberships")
+    }
+  } catch (res) {
+
   }
 }
 

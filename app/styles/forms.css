@@ -321,6 +321,10 @@ input.underline-input {
     margin-right: 5px;
 }
 
+.top-text{
+  margin-top: 20px;
+}
+
 .BusinessName{
   width: 80%;
 }

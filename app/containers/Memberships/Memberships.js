@@ -24,8 +24,8 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import saga from './saga';
-import { membershipsLoad, changeUserType } from './actions';
-import { makeSelectMemberships, userType } from './selectors';
+import { membershipsLoad, changeUserType, changeFormInput, sendTypePages } from './actions';
+import { makeSelectMemberships, userType, formInputs } from './selectors';
 import reducer from './reducer';
 import Membership from '../../components/Memberships';
 
@@ -46,9 +46,9 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
     this.state = {
       openTime: [null, null, null, null, null, null, null],
       closeTime: [null, null, null, null, null, null, null],
-      startDate: moment(),
+      startDate: '',
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChangePicker.bind(this);
   }
 
   componentDidMount() {
@@ -62,7 +62,7 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
 
   handleChange = (event, index, value) => this.setState({ value });
 
-  handleChange(date) {
+  handleChangePicker(date) {
     this.setState({
       startDate: date,
     });
@@ -71,13 +71,19 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
   handleFiles = (files: Array<File>) => {
     this.file = files[0];
     this.forceUpdate();
-    console.log(files);
+    this.props.changeFormInput('businessLogo')(files[0])
+  }
+
+  handleProfilePic = (files: Array<File>) => {
+    this.file = files[0];
+    this.forceUpdate();
+    this.props.changeFormInput('picture')(files[0])
   }
 
   handleFilesImage = (files: Array<File>) => {
     this.fileImage = files[0];
     this.forceUpdate();
-    console.log(files);
+    this.props.changeFormInput('bannerImage')({target: {value: files[0]}})
   }
 
   handleTimeChange = (index) => (event, i, value) => {
@@ -102,66 +108,89 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
 
   renderTableRows = () => ['Monday', 'Tuesday', 'Wesnesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => {
     const isClose = (this.state.openTime[index] === 0);
-
     const open = [<MenuItem value={0} key={'close'} primaryText={'Close'} />];
     for (let i = 0; i < 48; i++) {
       open.push(<MenuItem value={i + 1} key={i} primaryText={`${Math.floor(i / 2)}:${i % 2 === 0 ? '00' : '30'}`} />);
     }
-
     const close = [];
     for (let i = 0; i < 48; i++) {
       close.push(<MenuItem value={i + 1} key={i} primaryText={`${Math.floor(i / 2)}:${i % 2 === 0 ? '00' : '30'}`} />);
     }
-    return (<tr>
-      <td className="tg-yw4l">{day}</td>
-
-
-      <td className="tg-yw4l" colSpan={isClose ? 2 : false}>
-        <SelectField
-          style={{ width: '100%' }}
-          value={this.state.openTime[index]}
-          onChange={this.handleTimeChange(index)}
-          maxHeight={200}
-        >
+    return (
+      <tr>
+        <td className="tg-yw4l">{day}</td>
+        <td className="tg-yw4l" colSpan={isClose ? 2 : false}>
+          <SelectField
+            style={{ width: '100%' }}
+            value={this.state.openTime[index]}
+            onChange={this.handleTimeChange(index)}
+            maxHeight={200}
+          >
           {open}
-        </SelectField>
-      </td>
-
-      {!isClose && <td className="tg-yw4l"><SelectField
-        style={{ width: '100%' }}
-        value={this.state.closeTime[index]}
-        onChange={this.handleTimeCloseChange(index)}
-        maxHeight={200}
-      >
-        {close}
-      </SelectField></td>
+          </SelectField>
+        </td>
+        {!isClose
+          &&
+          <td className="tg-yw4l">
+            <SelectField
+              style={{ width: '100%' }}
+              value={this.state.closeTime[index]}
+              onChange={this.handleTimeCloseChange(index)}
+              maxHeight={200}
+            >
+            {close}
+            </SelectField>
+          </td>
         }
-
-
-    </tr>);
+      </tr>
+    );
   })
 
-  renderTable = () => (<table className="tg" style={{ width: '80%', margin: 'auto', marginTop: '14px' }}>
-    <tr>
-      <th className="tg-qcjy">Day</th>
-      <th Name="tg-yw4l">Opening Time</th>
-      <th className="tg-yw4l">Closing Time</th>
-    </tr>
-    {this.renderTableRows()}
-  </table>)
+  renderTable = () => (
+    <table
+      className="tg"
+      style={{ width: '80%', margin: 'auto', marginTop: '14px' }}
+    >
+      <tr>
+        <th className="tg-qcjy">Day</th>
+        <th Name="tg-yw4l">Opening Time</th>
+        <th className="tg-yw4l">Closing Time</th>
+      </tr>
+      {this.renderTableRows()}
+    </table>
+  )
 
   renderBusiness =() => (
     <div>
       <div className="register-final-table">
         <div className="register-final-left-col">
-          <TextField hintText="Name" style={{ width: '80%' }} />
-          <TextField hintText="Phone number" style={{ width: '50%', verticalAlign: 'middle' }} />
+          <TextField hintText="Name"
+            value={this.props.formInputs.name}
+            onChange={this.props.changeFormInput('name')}
+            style={{ width: '80%' }}
+          />
+          <TextField
+            hintText="Phone number"
+            value={this.props.formInputs.phoneNumber}
+            onChange={this.props.changeFormInput('phoneNumber')}
+            style={{ width: '50%', verticalAlign: 'middle' }}
+          />
           <RaisedButton label="Verify" style={{ width: '30%' }} />
           {this.renderTable()}
         </div>
         <div className="register-final-right-col">
-          <TextField hintText="Business Name" style={{ width: '77%' }} />
-          <TextField hintText="Business Contact Number" style={{ width: '77%' }} />
+          <TextField
+            hintText="Business Name"
+            value={this.props.formInputs.contactName}
+            onChange={this.props.changeFormInput('contactName')}
+            style={{ width: '77%' }}
+          />
+          <TextField
+            hintText="Business Contact Number"
+            value={this.props.formInputs.contactNumber}
+            onChange={this.props.changeFormInput('contactNumber')}
+            style={{ width: '77%' }}
+          />
           <br />
           {this.file
             ? <ReactFileReader handleFiles={this.handleFiles}>
@@ -178,12 +207,20 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
               </ReactFileReader>
             : <ReactFileReader handleFiles={this.handleFilesImage}>
                 <img />
-                <RaisedButton label="Choose Business Image" style={style} />
+                <RaisedButton label="Choose Banner Image" style={style} />
               </ReactFileReader>
           }
-          <TextField hintText="City" style={{ width: '77%' }} />
-          <TextField hintText="Message Field"
+          <TextField
+            hintText="City"
+            value={this.props.formInputs.location}
+            onChange={this.props.changeFormInput('location')}
+            style={{ width: '77%' }}
+          />
+          <TextField
+            hintText="Message Field"
             floatingLabelText=" Business Description"
+            value={this.props.formInputs.serviceDescription}
+            onChange={this.props.changeFormInput('serviceDescription')}
             multiLine
             rows={2}
             style={{ textAlign: 'left', height: '74px', width: '77%' }}
@@ -205,14 +242,24 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
   renderRegularUser = () => (
     <div className="register-final-table">
       <div className="register-final-left-col">
-        <TextField hintText="Name" style={{ width: '80%' }} />
-        <TextField hintText="Phone number" style={{ width: '50%', verticalAlign: 'middle' }} />
+        <TextField
+          hintText="Name"
+          value={this.props.formInputs.name}
+          onChange={this.props.changeFormInput('name')}
+          style={{ width: '80%' }}
+        />
+        <TextField
+          hintText="Phone number"
+          value={this.props.formInputs.phoneNumber}
+          onChange={this.props.changeFormInput('phoneNumber')}
+          style={{ width: '50%', verticalAlign: 'middle' }}
+        />
         <RaisedButton label="Verify"
           style={{ width: '30%' }}
         />
         <DatePicker
           selected={this.state.startDate}
-          onChange={this.handleChange}
+          onChange={this.handleChangePicker}
           className="underline-input type16 datepicker"
           style={{width: '110%', margin: 'auto'}}
           type="picker"
@@ -221,17 +268,21 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
         />
         <TextField
           hintText="City"
+          value={this.props.formInputs.location}
+          onChange={this.props.changeFormInput('location')}
           style={{ width: '80%' }}
         />
       </div>
       <div className="register-final-right-col">
         <TextField
           hintText="ID"
+          value={this.props.formInputs.idNumber}
+          onChange={this.props.changeFormInput('idNumber')}
           style={{ width: '77%' }}
         />
         {this.file
           ? <ReactFileReader
-              handleFiles={this.handleFiles}
+              handleFiles={this.handleProfilePic}
             >
               <FileImage
                 width="300"
@@ -240,7 +291,7 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
               />
             </ReactFileReader>
           : <ReactFileReader
-              handleFiles={this.handleFiles}
+              handleFiles={this.handleProfilePic}
             >
               <img className="create-wedding__image" />
               <RaisedButton
@@ -282,11 +333,11 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
         >
           <div className="page-small-single-col white-bg shadow rounded-corners u-cf email-confirm-container">
             <form
-              onSubmit={this.props.EmailConfirmedForm}
+              onSubmit={this.props.sendTypePages}
               name="register-final"
             >
               <h3
-                className="vertical-padding bold"
+                className="vertical-padding bold top-text"
               >
                 Please provide us with a few additional details.
               </h3>
@@ -296,9 +347,10 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
                 floatingLabelText="Select User Type"
                 style={{ textAlign: 'left' }}
                 name="category"
-                className="contact-select type14 select-category">
-                  <MenuItem value={1} primaryText="Regular User" />
-                  <MenuItem value={2} primaryText="Business" />
+                className="contact-select type14 select-category"
+              >
+                <MenuItem value={1} primaryText="Regular User" />
+                <MenuItem value={2} primaryText="Business" />
               </SelectField>
               {this.props.userType === 1 && this.renderRegularUser()
               }
@@ -320,19 +372,20 @@ Memberships.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    // EmailConfirmedForm: (evt) => {
-    //   evt.preventDefault();
-    //   dispatch(sendAdditionalDetails());
-    // },
+    sendTypePages: (evt) => {
+      evt.preventDefault();
+      dispatch(sendTypePages());
+    },
     membershipsLoad: () => dispatch(membershipsLoad()),
     changeUserType: (a, b, value) => dispatch(changeUserType(value)),
+    changeFormInput: (inputName) => (e) => dispatch(changeFormInput(e.target.value, inputName))
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   memberships: makeSelectMemberships(),
   userType: userType(),
-
+  formInputs: formInputs(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

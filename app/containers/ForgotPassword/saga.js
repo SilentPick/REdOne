@@ -1,5 +1,6 @@
 import { call, select, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
+import {toastr} from 'react-redux-toastr/lib'
 import { makeSelectForgotUserName } from './selectors';
 import { FORGOTPASS_SEND } from './constants';
 
@@ -8,15 +9,19 @@ export function* forgot() {
   const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/register/forgotPassword';
 
   try {
-    yield call(request, requestURL, {
+    const res = yield call(request, requestURL, {
       method: 'post',
       body: JSON.stringify({
         username,
       }),
-    });
-    alert('everything okay. Please, check your Email');
+    })
+    if(res.hasError){
+      toastr.warning('Warnings!', res.errors["0"].message)
+    }else{
+      toastr.success('Success!', 'Please, check your E-mail to confirm')
+    }
   } catch (err) {
-    alert('Something wrong');
+
   }
 }
 

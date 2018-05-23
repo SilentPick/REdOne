@@ -11,3 +11,8 @@ export const userType = () => createSelector(
   selectEmailConfirmed,
   (emailconfirmedState) => emailconfirmedState.get('usertype')
 );
+
+export const formInputs = () => createSelector(
+  selectEmailConfirmed,
+  (emailconfirmedState) => emailconfirmedState.get('formInputs').toJS()
+);

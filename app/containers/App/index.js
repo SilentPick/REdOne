@@ -8,6 +8,7 @@
 
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import ReduxToastr from 'react-redux-toastr/lib'
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
@@ -26,11 +27,11 @@ import '../../styles/type.css';
 import '../../styles/buttons.css';
 import '../../styles/tables.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 const AppWrapper = styled.div`
 
 `;
-
 export default function App() {
   return (
     <MuiThemeProvider>
@@ -51,6 +52,14 @@ export default function App() {
           <Route path="/Memberships" component={Memberships} />
           <Route path="/" component={LoginPage} />
         </Switch>
+          <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        position="top-left"
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar/>
         {/* <Footer />*/}
       </AppWrapper>
     </MuiThemeProvider>

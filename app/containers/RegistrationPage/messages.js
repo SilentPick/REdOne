@@ -54,4 +54,12 @@ export default defineMessages({
     id: 'boilerplate.containers.RegistratinoPage.repeatpassword.input',
     defaultMessage: 'Repeat password',
   },
+  termsConditions: {
+    id: 'boilerplate.containers.LoginPage.terms.conditions',
+    defaultMessage: 'By accessing your account you are agreeing with our website’s ',
+  },
+  termsButton: {
+    id: 'boilerplate.containers.LoginPage.terms.button',
+    defaultMessage: 'Terms and Conditions.',
+  },
 });

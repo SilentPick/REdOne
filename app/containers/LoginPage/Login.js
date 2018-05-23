@@ -11,7 +11,7 @@ import injectSaga from 'utils/injectSaga';
 import saga from './saga';
 import { changeUserName, changePassword, sendUserNameAndPass } from './actions';
 import { makeSelectUserName, makeSelectPassword } from './selectors';
-import history from '../app';
+import { history } from 'app';
 import reducer from './reducer';
 import messages from './messages';
 import request from 'utils/request';
@@ -25,7 +25,10 @@ class Login extends React.PureComponent { // eslint-disable-line react/prefer-st
         provider: params._provider,
 	      idToken: params._token.idToken
       }),
-  })};
+    }).then(() => {
+      history.push("/Memberships")
+    })
+  };
 
   render() {
     return (
@@ -150,9 +153,9 @@ class Login extends React.PureComponent { // eslint-disable-line react/prefer-st
             </button>
           </SocialLogin>
           <p className="site-terms type12">
-            By accessing your account you are agreeing with our website’s
+            <FormattedMessage {...messages.termsConditions} />
             <a className="bold">
-              Terms and Conditions.
+              <FormattedMessage {...messages.termsButton} />
             </a>
           </p>
         </div>

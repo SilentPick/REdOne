@@ -1,4 +1,4 @@
-import { CHANGE_FORMINPUT, MEMBERSHIPS_LOADED, MEMBERSHIPS_LOAD, VERIFY_EMAIL, USER_TYPE } from './constants';
+import { CHANGE_FORM_INPUT, MEMBERSHIPS_LOADED, MEMBERSHIPS_LOAD, SEND_TYPE_PAGES, USER_TYPE } from './constants';
 
 /**
  * Changes the input field of the form
@@ -7,10 +7,11 @@ import { CHANGE_FORMINPUT, MEMBERSHIPS_LOADED, MEMBERSHIPS_LOAD, VERIFY_EMAIL, U
  *
  * @return {object}    An action object with a type of CHANGE_USERNAME
  */
-export function changeFormInput(inputValue) {
+export function changeFormInput(inputValue, inputName) {
   return {
-    type: CHANGE_FORMINPUT,
+    type: CHANGE_FORM_INPUT,
     inputValue,
+    inputName
   };
 }
 export function membershipsLoaded(res) {
@@ -31,5 +32,11 @@ export function changeUserType(inputValue) {
   return {
     type: USER_TYPE,
     inputValue,
+  };
+}
+
+export function sendTypePages() {
+  return {
+    type: SEND_TYPE_PAGES,
   };
 }

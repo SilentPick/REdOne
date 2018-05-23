@@ -1,5 +1,6 @@
 import { call, select, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
+import {toastr} from 'react-redux-toastr/lib'
 import { makeSelectUsername, makeSelectEmail, makeSelectPassword, makeSelectRepeatPassword } from 'containers/RegistrationPage/selectors';
 import { SEND_REGISTRATION } from './constants';
 
@@ -13,7 +14,7 @@ export function* registration() {
 
   if (response !== '') {
     try {
-      yield call(request, requestURL, {
+       const res = yield call(request, requestURL, {
         method: 'post',
         body: JSON.stringify({
           name: username,
@@ -21,13 +22,18 @@ export function* registration() {
           password,
           password2: repeatpassword,
         }),
-      });
-      alert('everything okay, please, check your email');
+      })
+      if (res.hasError){
+        toastr.error('Error!', res.errors["0"].message)
+      }else{
+        toastr.success('Success!', 'Please, check your E-mail to confirm!')
+      }
     } catch (err) {
+      console.error(err)
     //  yield put(repoLoadingError(err));
     }
   } else {
-    alert('try recaptcha');
+    toastr.warning('Warning!', 'Please, confirm reCaptcha')
   }
 }
 

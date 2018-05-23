@@ -4,6 +4,7 @@
 
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
+import {reducer as toastrReducer} from 'react-redux-toastr/lib'
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import globalReducer from 'containers/App/reducer';
@@ -46,5 +47,6 @@ export default function createReducer(injectedReducers) {
     global: globalReducer,
     language: languageProviderReducer,
     ...injectedReducers,
+    toastr: toastrReducer,
   });
 }

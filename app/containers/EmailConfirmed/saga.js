@@ -1,6 +1,6 @@
 import { call, select, takeLatest, put } from 'redux-saga/effects';
 import request from 'utils/request';
-// import { makeSelectStreetAddress, makeSelectDistrict, makeSelectCity, makeSelectId } from 'containers/EmailConfirmed/selectors';
+import {toastr} from 'react-redux-toastr/lib'
 import { VERIFY_EMAIL } from './constants';
 import { membershipsLoaded } from './actions';
 
@@ -10,7 +10,8 @@ export function* verify({ token }) {
   try {
     const res = yield call(request, membershipURL, {
       method: 'get',
-    });
+    })
+      toastr.success('Success!', 'Your registration is complete')
   } catch (err) {
   }
 }

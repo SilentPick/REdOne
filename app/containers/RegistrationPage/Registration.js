@@ -149,9 +149,9 @@ class Registration extends React.PureComponent { // eslint-disable-line react/pr
             </button>
           </SocialLogin>
           <p className="site-terms type12">
-            By registering you are agreeing with our website’s
+            <FormattedMessage {...messages.termsConditions} />
             <a className="bold">
-              Terms and Conditions.
+              <FormattedMessage {...messages.termsButton} />
             </a>
           </p>
         </div>

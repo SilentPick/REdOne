@@ -1,7 +1,9 @@
 import { call, select, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
+import {toastr} from 'react-redux-toastr/lib';
 import { makeSelectNewPassword, makeSelectConfirmPassword } from 'containers/NewPassword/selectors';
 import { SEND_NEWPASS } from './constants';
+import { history } from 'app';
 
 export function* newPass({ token }) {
   const newPassword = yield select(makeSelectNewPassword());
@@ -9,17 +11,24 @@ export function* newPass({ token }) {
   const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/register/resetPassword';
 
   try {
-    yield call(request, requestURL, {
+    const res = yield call(request, requestURL, {
       method: 'post',
       body: JSON.stringify({
         password: newPassword,
         password2: confirmPassword,
         t: token,
       }),
-    });
-    alert('everything okay. Your pass is update now');
+    })
+    console.error(res)
+    if(res.hasError){
+      toastr.warning('Warnings!', res.errors["0"].message)
+    }else{
+      toastr.success('Success!', res.message["0"])
+      history.push("/Login")
+    }
+
   } catch (err) {
-  //  yield put(repoLoadingError(err));
+    console.error(err)
   }
 }
 
