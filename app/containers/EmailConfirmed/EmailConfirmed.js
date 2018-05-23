@@ -20,6 +20,8 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -44,11 +46,18 @@ class EmailConfirmed extends React.PureComponent { // eslint-disable-line react/
           <form name="register-final" className="register-final-form">
             <div className="page-small-single-col white-bg shadow rounded-corners u-cf email-confirm-container">
               <i className="fa fa-check register-checksign" aria-hidden="true"></i>
-              <h1 className="dual-color subtitle-register-page bolder"><span>Email</span> confirmed</h1>
-              <p id="confirmation-text" className="body-text">Please, Log In to continue</p>
+              <h1 className="dual-color subtitle-register-page bolder"><span><FormattedMessage {...messages.emailConfirmed} /></span><FormattedMessage {...messages.emailConfirmed2} /></h1>
+              <p id="confirmation-text" className="body-text"><FormattedMessage {...messages.mainText} /></p>
               <br />
               <Link to="/Login">
-                <input className="bold" type="submit" name="login" value="Finish" />
+                <FormattedMessage {...messages.finishButton}>
+                  {(message) => (<input
+                    className="bold"
+                    type="submit"
+                    name="forgot-pass"
+                    value={message}
+                  />)}
+                </FormattedMessage>
               </Link>
             </div>
           </form>
