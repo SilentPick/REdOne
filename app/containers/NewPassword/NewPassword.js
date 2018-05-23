@@ -11,51 +11,57 @@ import { changeNewPassword, changeConfirmPassword, sendNewPass } from './actions
 import { makeSelectNewPassword, makeSelectConfirmPassword } from './selectors';
 import reducer from './reducer';
 import messages from './messages';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 class NewPassword extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <section id="page-smallest" className="u-cf">
-        <div className="forgot-pass-container white-bg shadow rounded-corners">
-          <div className="logo-on-white"></div>
-          <p id="confirmation-text" className="body-text">
-            <span>
-              <FormattedMessage {...messages.mainText} />
-            </span>
-          </p>
-          <form onSubmit={(e) => this.props.SendNewPassForm(e, this.props.match.params.token)} name="reset-pass" className="login-form">
-            <FormattedMessage {...messages.newpasswordInput}>
-              {(message) => (<input
-                value={this.props.newpassword}
-                onChange={this.props.onChangeNewPassword}
-                className="underline-input type16"
-                type="password"
-                name="new-pass"
-                placeholder={message}
-              />)}
-            </FormattedMessage>
-            <FormattedMessage {...messages.confirmpasswordInput}>
-              {(message) => (<input
-                value={this.props.confirmpassword}
-                onChange={this.props.onChangeConfirmPassword}
-                className="underline-input type16"
-                type="password"
-                name="confirm-pass"
-                placeholder={message}
-              />)}
-            </FormattedMessage>
-            <br /><br />
-            <FormattedMessage {...messages.resetButton}>
-              {(message) => (<input
-                className="bold"
-                type="submit"
-                name="reset-pass"
-                value={message}
-              />)}
-            </FormattedMessage>
-          </form>
-        </div>
-      </section>
+      <div>
+        <Header></Header>
+        <section id="page-smallest" className="u-cf">
+          <div className="forgot-pass-container white-bg shadow rounded-corners">
+            <div className="logo-on-white"></div>
+            <p id="confirmation-text" className="body-text">
+              <span>
+                <FormattedMessage {...messages.mainText} />
+              </span>
+            </p>
+            <form onSubmit={(e) => this.props.SendNewPassForm(e, this.props.match.params.token)} name="reset-pass" className="login-form">
+              <FormattedMessage {...messages.newpasswordInput}>
+                {(message) => (<input
+                  value={this.props.newpassword}
+                  onChange={this.props.onChangeNewPassword}
+                  className="underline-input type16"
+                  type="password"
+                  name="new-pass"
+                  placeholder={message}
+                />)}
+              </FormattedMessage>
+              <FormattedMessage {...messages.confirmpasswordInput}>
+                {(message) => (<input
+                  value={this.props.confirmpassword}
+                  onChange={this.props.onChangeConfirmPassword}
+                  className="underline-input type16"
+                  type="password"
+                  name="confirm-pass"
+                  placeholder={message}
+                />)}
+              </FormattedMessage>
+              <br /><br />
+              <FormattedMessage {...messages.resetButton}>
+                {(message) => (<input
+                  className="bold"
+                  type="submit"
+                  name="reset-pass"
+                  value={message}
+                />)}
+              </FormattedMessage>
+            </form>
+          </div>
+        </section>
+        <Footer></Footer>
+      </div>
     );
   }
 }

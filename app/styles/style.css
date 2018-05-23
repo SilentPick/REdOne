@@ -30,12 +30,7 @@ body {
     position: relative;
 }
 
-body::after {
-    content: '';
-    display: block;
-    height: 130px;
-    /* Footer's height */
-}
+
 
 /* Clearing
 ––––––––––––––––––––––––––––––––––––––––––––––---------------------–––– */

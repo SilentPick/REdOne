@@ -28,6 +28,8 @@ import { membershipsLoad, changeUserType, changeFormInput, sendTypePages } from 
 import { makeSelectMemberships, userType, formInputs } from './selectors';
 import reducer from './reducer';
 import Membership from '../../components/Memberships';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 const style = {
   marginTop: 12,
@@ -326,41 +328,45 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
 
   render(){
     return(
-      <section id="page-small" className="u-cf">
-        <form
-          name="register-final"
-          className="register-final-form"
-        >
-          <div className="page-small-single-col white-bg shadow rounded-corners u-cf email-confirm-container">
-            <form
-              onSubmit={this.props.sendTypePages}
-              name="register-final"
-            >
-              <h3
-                className="vertical-padding bold top-text"
+      <div>
+        <Header></Header>
+        <section id="page-small" className="u-cf">
+          <form
+            name="register-final"
+            className="register-final-form"
+          >
+            <div className="page-small-single-col white-bg shadow rounded-corners u-cf email-confirm-container">
+              <form
+                onSubmit={this.props.sendTypePages}
+                name="register-final"
               >
-                Please provide us with a few additional details.
-              </h3>
-              <SelectField
-                value={this.props.userType}
-                onChange={this.props.changeUserType}
-                floatingLabelText="Select User Type"
-                style={{ textAlign: 'left' }}
-                name="category"
-                className="contact-select type14 select-category"
-              >
-                <MenuItem value={1} primaryText="Regular User" />
-                <MenuItem value={2} primaryText="Business" />
-              </SelectField>
-              {this.props.userType === 1 && this.renderRegularUser()
-              }
-              {this.props.userType === 2 && this.renderBusiness()
-              }
-              {this.props.userType !== null && <input className="bold finish-button" type="submit" name="login" value="Finish" />}
-            </form>
-          </div>
-        </form>
-      </section>
+                <h3
+                  className="vertical-padding bold top-text"
+                >
+                  Please provide us with a few additional details.
+                </h3>
+                <SelectField
+                  value={this.props.userType}
+                  onChange={this.props.changeUserType}
+                  floatingLabelText="Select User Type"
+                  style={{ textAlign: 'left' }}
+                  name="category"
+                  className="contact-select type14 select-category"
+                >
+                  <MenuItem value={1} primaryText="Regular User" />
+                  <MenuItem value={2} primaryText="Business" />
+                </SelectField>
+                {this.props.userType === 1 && this.renderRegularUser()
+                }
+                {this.props.userType === 2 && this.renderBusiness()
+                }
+                {this.props.userType !== null && <input className="bold finish-button" type="submit" name="login" value="Finish" />}
+              </form>
+            </div>
+          </form>
+        </section>
+        <Footer></Footer>
+      </div>
     )
   }
 }

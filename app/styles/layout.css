@@ -49,6 +49,7 @@
     max-width: 500px;
     position: relative;
     width: 100%;
+    min-height: 615px;
 }
 
 .forgot-pass-container {
@@ -79,6 +80,7 @@
     margin: 0 auto 20px auto;
     max-width: 850px;
     width: 80%;
+    min-height: 550px;
 }
 
 .page-small-left-col,
@@ -734,7 +736,6 @@ input:checked + label.optional-addon-label {
 #main-footer {
     bottom: 0;
     height: 130px;
-    position: absolute;
 }
 
 .footer-left-container {
