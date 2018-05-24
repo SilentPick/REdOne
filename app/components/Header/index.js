@@ -1,6 +1,12 @@
 import React from 'react';
 import renderHTML from 'react-render-html';
 
+import submenu from '../../media/homepage-submenu-ad.jpg';
+import anotherImage from '../../media/homepage-another-image.jpg'
+import submenuServices from '../../media/homepage-submenu-services.jpg'
+import submenuWanted from '../../media/homepage-submenu-wanted.jpg'
+import profileImage from '../../media/profile-image.jpg'
+
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
@@ -131,7 +137,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                       </li>
                       <li><a href="#">Others</a></li>
                     </ul>
-                    <img className="submenu-ad-image" src="media/homepage-submenu-ad.jpg" alt="Ad" />
+                    <img className="submenu-ad-image" src={submenu} alt="Ad" />
                   </div>
                 </li>
                 <li className="main-nav-top-tier">
@@ -195,7 +201,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                       </li>
                       <li><a href="#">Others</a></li>
                     </ul>
-                    <img className="submenu-ad-image" src="media/homepage-another-image.jpg" alt="Another ad" />
+                    <img className="submenu-ad-image" src={anotherImage} alt="Another ad" />
                   </div>
                 </li>
                 <li className="main-nav-top-tier">
@@ -305,7 +311,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                       </li>
                       <li><a href="#">Others</a></li>
                     </ul>
-                    <img className="submenu-ad-image" src="media/homepage-submenu-services.jpg" alt="Ad" />
+                    <img className="submenu-ad-image" src={submenuServices} alt="Ad" />
                   </div>
                 </li>
                 <li className="main-nav-top-tier">
@@ -346,7 +352,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                       </li>
                       <li><a href="#">Others</a></li>
                     </ul>
-                    <img className="submenu-ad-image" src="media/homepage-submenu-wanted.jpg" alt="Ad" />
+                    <img className="submenu-ad-image" src={submenuWanted} alt="Ad" />
                   </div>
                 </li>
                 <li className="main-nav-top-tier"><a href="shop.html">Shops</a></li>
@@ -360,7 +366,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                   </ul>
                 </li>
                 <li className="main-nav-top-tier logout-menu">
-                  <a href="profile-dashboard.html" className="contact-image-container"><img className="contact-image" src="media/profile-image.jpg" /></a>
+                  <a href="profile-dashboard.html" className="contact-image-container"><img className="contact-image" src={profileImage} /></a>
                   <ul className="contact-submenu">
                     <li>Welcome Username</li>
                     <li><a href="profile-dashboard.html">Profile</a></li>

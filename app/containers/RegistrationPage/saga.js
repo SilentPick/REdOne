@@ -29,7 +29,6 @@ export function* registration() {
         toastr.success('Success!', 'Please, check your E-mail to confirm!')
       }
     } catch (err) {
-      console.error(err)
     //  yield put(repoLoadingError(err));
     }
   } else {

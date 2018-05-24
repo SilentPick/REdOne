@@ -12,7 +12,7 @@ export default defineMessages({
   },
   mainText2: {
     id: 'boilerplate.containers.ForgotPassword.main.text2',
-    defaultMessage: 'Enter your username or email address below.',
+    defaultMessage: 'Enter your email address below.',
   },
   toLoginButton: {
     id: 'boilerplate.containers.ForgotPassword.toLogin.button',
@@ -24,7 +24,7 @@ export default defineMessages({
   },
   forgotPlaceholder: {
     id: 'boilerplate.containers.ForgotPassword.forgot.placeholder',
-    defaultMessage: 'Email address or username',
+    defaultMessage: 'Email address',
   },
   continueButton: {
     id: 'boilerplate.containers.ForgotPassword.continue.button',
