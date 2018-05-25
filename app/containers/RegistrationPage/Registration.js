@@ -18,35 +18,16 @@ import history from '../app';
 import request from 'utils/request';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import RedOne from '../../components/RedOneBlock';
+import Social from '../../components/SocialLogin';
 
 class Registration extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
-  handleSocialLogin = (params) => {
-    request('http://redvalley.westeurope.cloudapp.azure.com/oauth', {
-      method: 'post',
-      body: JSON.stringify({
-        provider: params._provider,
-	      idToken: params._token.idToken
-      }),
-  })};
-
   render() {
     return (
       <div>
         <Header></Header>
         <section id="page-small" className="u-cf">
-          <div className="page-small-left-col blue-bg shadow rounded-corners">
-            <div className="logo-login"></div>
-            <h3 className="register-white-text bold">
-              <FormattedMessage {...messages.leftBlockHeader} />
-            </h3>
-            <p className="small-text register-white-text">
-              <FormattedMessage {...messages.leftMainText} />
-            </p>
-            <p className="small-text register-white-text">
-              <FormattedMessage {...messages.leftFooter} />
-            </p>
-          </div>
+          <RedOne></RedOne>
           <div className="page-small-right-col white-bg shadow rounded-corners">
             <ul className="tab-nav two-col bold shadow">
               <Link to="/Login">
@@ -121,36 +102,7 @@ class Registration extends React.PureComponent { // eslint-disable-line react/pr
               </FormattedMessage>
               <div className="linethrough bold">or</div>
             </form>
-            <SocialLogin
-              provider="facebook"
-              appId="950746635099026"
-              callback={this.handleSocialLogin}
-            >
-              <i
-                className="fa fa-facebook type16 social-icon-login"
-                aria-hidden="true"
-              >
-              </i>
-              <button className="login-facebook bold">
-                <FormattedMessage {...messages.socialButtons} />
-                 Facebook
-              </button>
-            </SocialLogin>
-            <SocialLogin
-              provider="google"
-              appId="353004601792-s5vg55h77u9i83eoa0ep79e9vh10tls5.apps.googleusercontent.com"
-              callback={this.handleSocialLogin}
-            >
-              <i
-                className="fa fa-twitter type16 social-icon-login"
-                aria-hidden="true"
-              >
-              </i>
-              <button className="login-twitter bold type16">
-                <FormattedMessage {...messages.socialButtons} />
-                Google
-              </button>
-            </SocialLogin>
+            <Social></Social>
             <p className="site-terms type12">
               <FormattedMessage {...messages.termsConditions} />
               <a className="bold">
