@@ -19,6 +19,8 @@ import EmailConfirmed from 'containers/EmailConfirmed/EmailConfirmed';
 import ForgotPassword from 'containers/ForgotPassword/ForgotPassword';
 import NewPassword from 'containers/NewPassword/NewPassword';
 import Memberships from 'containers/Memberships/Memberships';
+import {PrivateRoute} from '../../components/PrivateRoute';
+import {GuestRoute} from '../../components/GuestRoute';
 
 import '../../styles/forms.css';
 import '../../styles/layout.css';
@@ -44,22 +46,23 @@ export default function App() {
         </Helmet>
         <Header /> */}
         <Switch>
-          <Route exact path="/Registration" component={RegistrationPage} />
+          <GuestRoute exact path="/Registration" component={RegistrationPage} />
           <Route path="/register-complete/:token" component={EmailConfirmed} />
           <Route path="/ForgotPassword" component={ForgotPassword} />
           <Route path="/reset-password/:token" component={NewPassword} />
-          <Route path="/Login" component={LoginPage} />
-          <Route path="/Memberships" component={Memberships} />
+          <GuestRoute path="/Login" component={LoginPage} />
+          <PrivateRoute path="/complete-profile" component={Memberships} />
           <Route path="/" component={LoginPage} />
         </Switch>
-          <ReduxToastr
-        timeOut={4000}
-        newestOnTop={false}
-        preventDuplicates
-        position="top-left"
-        transitionIn="fadeIn"
-        transitionOut="fadeOut"
-        progressBar/>
+        <ReduxToastr
+          timeOut={4000}
+          newestOnTop={false}
+          preventDuplicates
+          position="top-left"
+          transitionIn="fadeIn"
+          transitionOut="fadeOut"
+          progressBar
+        />
         {/* <Footer />*/}
       </AppWrapper>
     </MuiThemeProvider>
