@@ -9,7 +9,7 @@ import { history } from 'app';
 export function* userNameAndPass() {
   const username = yield select(makeSelectUserName());
   const password = yield select(makeSelectPassword());
-  const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/api/login';
+  const requestURL = 'http://i-valley.westus.cloudapp.azure.com/api/login';
 
   try {
     const res = yield call(request, requestURL, {

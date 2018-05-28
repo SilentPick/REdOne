@@ -22,7 +22,7 @@ class Membership extends React.Component { // eslint-disable-line react/prefer-s
           <p className="service-prices type35 bolder">{`$${this.props.membershipCost}`}<span className="type20 bolder">.99</span></p>
           <div
             className="listing-btn type16 bold u-cf" onClick={() => {
-              request('http://redvalley.westeurope.cloudapp.azure.com/paymember', {
+              request('http://i-valley.westus.cloudapp.azure.com/paymember', {
                 headers: {
                   Authorization: 'Bearer ' + getToken(),
                 },

@@ -6,7 +6,7 @@ import { membershipsLoaded } from './actions';
 
 export function* verify({ token }) {
   const tokenVerify = token;
-  const membershipURL = `http://redvalley.westeurope.cloudapp.azure.com/register/verify?t=${tokenVerify}`;
+  const membershipURL = `http://i-valley.westus.cloudapp.azure.com/register/verify?t=${tokenVerify}`;
   try {
     const res = yield call(request, membershipURL, {
       method: 'get',

@@ -9,7 +9,7 @@ import request from 'utils/request';
 class Social extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   handleSocialLogin = (params) => {
-    request('http://redvalley.westeurope.cloudapp.azure.com/oauth', {
+    request('http://i-valley.westus.cloudapp.azure.com/oauth', {
       method: 'post',
       body: JSON.stringify({
         provider: params._provider,

@@ -8,7 +8,7 @@ import { history } from 'app';
 export function* newPass({ token }) {
   const newPassword = yield select(makeSelectNewPassword());
   const confirmPassword = yield select(makeSelectConfirmPassword());
-  const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/register/resetPassword';
+  const requestURL = 'http://i-valley.westus.cloudapp.azure.com/register/resetPassword';
 
   try {
     const res = yield call(request, requestURL, {
@@ -19,7 +19,6 @@ export function* newPass({ token }) {
         t: token,
       }),
     })
-    console.error(res)
     if(res.hasError){
       toastr.warning('Warnings!', res.errors["0"].message)
     }else{

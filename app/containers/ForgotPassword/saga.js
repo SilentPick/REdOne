@@ -6,7 +6,7 @@ import { FORGOTPASS_SEND } from './constants';
 
 export function* forgot() {
   const username = yield select(makeSelectForgotUserName());
-  const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/register/forgotPassword';
+  const requestURL = 'http://i-valley.westus.cloudapp.azure.com/register/forgotPassword';
 
   try {
     const res = yield call(request, requestURL, {

@@ -9,7 +9,7 @@ export function* registration() {
   const email = yield select(makeSelectEmail());
   const password = yield select(makeSelectPassword());
   const repeatpassword = yield select(makeSelectRepeatPassword());
-  const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/register';
+  const requestURL = 'http://i-valley.westus.cloudapp.azure.com/register';
   const response = window.grecaptcha.getResponse();
 
   if (response !== '') {

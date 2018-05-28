@@ -18,14 +18,14 @@ export function* emailconfirmed() {
 
 export function* sendTypePage() {
   const userId = getUserId()
-  const requestURL = 'http://redvalley.westeurope.cloudapp.azure.com/user/{userId}';
+  const requestURL = 'http://i-valley.westus.cloudapp.azure.com/user/{userId}';
   try {
     yield call(request, requestURL, {
       method: 'post',
       body: {
         name: "ddd"
       }
-      
+
     });
   } catch (err) {
   }
