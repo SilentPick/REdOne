@@ -30,6 +30,8 @@ import reducer from './reducer';
 import Membership from '../../components/Memberships';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import RegularUser from '../../components/RegularUser';
+import Business from '../../components/Business';
 
 const style = {
   marginTop: 12,
@@ -57,11 +59,6 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
     this.props.membershipsLoad();
   }
 
-  renderMemberships = () => {
-    if (!this.props.memberships) return <h1>Loading</h1>;
-    return this.props.memberships.map((membership) => <Membership {...membership} />);
-  }
-
   handleChange = (event, index, value) => this.setState({ value });
 
   handleChangePicker(date) {
@@ -69,262 +66,6 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
       startDate: date,
     });
   }
-
-  handleFiles = (files: Array<File>) => {
-    this.file = files[0];
-    this.forceUpdate();
-    this.props.changeFormInput('businessLogo')(files[0])
-  }
-
-  handleProfilePic = (files: Array<File>) => {
-    this.file = files[0];
-    this.forceUpdate();
-    this.props.changeFormInput('picture')(files[0])
-  }
-
-  handleFilesImage = (files: Array<File>) => {
-    this.fileImage = files[0];
-    this.forceUpdate();
-    this.props.changeFormInput('bannerImage')({target: {value: files[0]}})
-  }
-
-  handleTimeChange = (index) => (event, i, value) => {
-    const newOpenTime = this.state.openTime.map((item, mapIndex) => {
-      if (mapIndex === index) {
-        return value;
-      }
-      return item;
-    });
-    this.setState({ openTime: newOpenTime });
-  };
-
-  handleTimeCloseChange = (index) => (event, i, value) => {
-    const newCloseTime = this.state.closeTime.map((item, mapIndex) => {
-      if (mapIndex === index) {
-        return value;
-      }
-      return item;
-    });
-    this.setState({ closeTime: newCloseTime });
-  };
-
-  renderTableRows = () => ['Monday', 'Tuesday', 'Wesnesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => {
-    const isClose = (this.state.openTime[index] === 0);
-    const open = [<MenuItem value={0} key={'close'} primaryText={'Close'} />];
-    for (let i = 0; i < 48; i++) {
-      open.push(<MenuItem value={i + 1} key={i} primaryText={`${Math.floor(i / 2)}:${i % 2 === 0 ? '00' : '30'}`} />);
-    }
-    const close = [];
-    for (let i = 0; i < 48; i++) {
-      close.push(<MenuItem value={i + 1} key={i} primaryText={`${Math.floor(i / 2)}:${i % 2 === 0 ? '00' : '30'}`} />);
-    }
-    return (
-      <tr>
-        <td className="tg-yw4l">{day}</td>
-        <td className="tg-yw4l" colSpan={isClose ? 2 : false}>
-          <SelectField
-            style={{ width: '100%' }}
-            value={this.state.openTime[index]}
-            onChange={this.handleTimeChange(index)}
-            maxHeight={200}
-          >
-          {open}
-          </SelectField>
-        </td>
-        {!isClose
-          &&
-          <td className="tg-yw4l">
-            <SelectField
-              style={{ width: '100%' }}
-              value={this.state.closeTime[index]}
-              onChange={this.handleTimeCloseChange(index)}
-              maxHeight={200}
-            >
-            {close}
-            </SelectField>
-          </td>
-        }
-      </tr>
-    );
-  })
-
-  renderTable = () => (
-    <table
-      className="tg"
-      style={{ width: '80%', margin: 'auto', marginTop: '14px' }}
-    >
-      <tr>
-        <th className="tg-qcjy">Day</th>
-        <th Name="tg-yw4l">Opening Time</th>
-        <th className="tg-yw4l">Closing Time</th>
-      </tr>
-      {this.renderTableRows()}
-    </table>
-  )
-
-  renderBusiness =() => (
-    <div>
-      <div className="register-final-table">
-        <div className="register-final-left-col">
-          <TextField hintText="Name"
-            value={this.props.formInputs.name}
-            onChange={this.props.changeFormInput('name')}
-            style={{ width: '80%' }}
-          />
-          <TextField
-            hintText="Phone number"
-            value={this.props.formInputs.phoneNumber}
-            onChange={this.props.changeFormInput('phoneNumber')}
-            style={{ width: '50%', verticalAlign: 'middle' }}
-          />
-          <RaisedButton label="Verify" style={{ width: '30%' }} />
-          {this.renderTable()}
-        </div>
-        <div className="register-final-right-col">
-          <TextField
-            hintText="Business Name"
-            value={this.props.formInputs.contactName}
-            onChange={this.props.changeFormInput('contactName')}
-            style={{ width: '77%' }}
-          />
-          <TextField
-            hintText="Business Contact Number"
-            value={this.props.formInputs.contactNumber}
-            onChange={this.props.changeFormInput('contactNumber')}
-            style={{ width: '77%' }}
-          />
-          <br />
-          {this.file
-            ? <ReactFileReader handleFiles={this.handleFiles}>
-                <FileImage width="300" height="200" file={this.file} />
-              </ReactFileReader>
-            : <ReactFileReader handleFiles={this.handleFiles}>
-                <img />
-                <RaisedButton label="Choose Business Logo" style={style} />
-              </ReactFileReader>
-          }
-          {this.fileImage
-            ? <ReactFileReader handleFiles={this.handleFilesImage}>
-                <FileImage width="300" height="200" file={this.fileImage} />
-              </ReactFileReader>
-            : <ReactFileReader handleFiles={this.handleFilesImage}>
-                <img />
-                <RaisedButton label="Choose Banner Image" style={style} />
-              </ReactFileReader>
-          }
-          <TextField
-            hintText="City"
-            value={this.props.formInputs.location}
-            onChange={this.props.changeFormInput('location')}
-            style={{ width: '77%' }}
-          />
-          <TextField
-            hintText="Message Field"
-            floatingLabelText=" Business Description"
-            value={this.props.formInputs.serviceDescription}
-            onChange={this.props.changeFormInput('serviceDescription')}
-            multiLine
-            rows={2}
-            style={{ textAlign: 'left', height: '74px', width: '77%' }}
-          />
-        </div>
-      </div>
-      <br />
-      <br />
-      <p style={{ textAlign: 'center', fontSize: '20px', margin: 'auto', marginTop: '50px' }}>
-        Please subscribe for a membership
-      </p>
-      <div style={{ height: '1px', width: '100%', background: 'grey', marginBottom: '30px', marginTop: '5px' }} />
-      <div className="memberships-container">
-        {this.renderMemberships()}
-      </div>
-    </div>
-  )
-
-  renderRegularUser = () => (
-    <div className="register-final-table">
-      <div className="register-final-left-col">
-        <TextField
-          hintText="Name"
-          value={this.props.formInputs.name}
-          onChange={this.props.changeFormInput('name')}
-          style={{ width: '80%' }}
-        />
-        <TextField
-          hintText="Phone number"
-          value={this.props.formInputs.phoneNumber}
-          onChange={this.props.changeFormInput('phoneNumber')}
-          style={{ width: '50%', verticalAlign: 'middle' }}
-        />
-        <RaisedButton label="Verify"
-          style={{ width: '30%' }}
-        />
-        <DatePicker
-          selected={this.state.startDate}
-          onChange={this.handleChangePicker}
-          className="underline-input type16 datepicker"
-          style={{width: '110%', margin: 'auto'}}
-          type="picker"
-          name="birthday"
-          placeholder="Birthday"
-        />
-        <TextField
-          hintText="City"
-          value={this.props.formInputs.location}
-          onChange={this.props.changeFormInput('location')}
-          style={{ width: '80%' }}
-        />
-      </div>
-      <div className="register-final-right-col">
-        <TextField
-          hintText="ID"
-          value={this.props.formInputs.idNumber}
-          onChange={this.props.changeFormInput('idNumber')}
-          style={{ width: '77%' }}
-        />
-        {this.file
-          ? <ReactFileReader
-              handleFiles={this.handleProfilePic}
-            >
-              <FileImage
-                width="300"
-                height="200"
-                file={this.file}
-              />
-            </ReactFileReader>
-          : <ReactFileReader
-              handleFiles={this.handleProfilePic}
-            >
-              <img className="create-wedding__image" />
-              <RaisedButton
-                label="Choose Profile Picture"
-                style={style}
-              />
-            </ReactFileReader>
-        }
-        {this.fileImage
-          ? <ReactFileReader
-              handleFiles={this.handleFilesImage}
-            >
-              <FileImage
-                width="300"
-                height="200"
-                file={this.fileImage}
-              />
-            </ReactFileReader>
-          : <ReactFileReader
-              handleFiles={this.handleFilesImage}
-            >
-              <img className="create-wedding__image" />
-              <RaisedButton
-                label="Choose Baner Image"
-                style={style}
-              />
-            </ReactFileReader>
-        }
-      </div>
-    </div>
-  )
 
   render(){
     return(
@@ -356,9 +97,9 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
                   <MenuItem value={1} primaryText="Regular User" />
                   <MenuItem value={2} primaryText="Business" />
                 </SelectField>
-                {this.props.userType === 1 && this.renderRegularUser()
+                {this.props.userType === 1 && <RegularUser changeFormInput={this.props.changeFormInput} formInputs={this.props.formInputs}/>
                 }
-                {this.props.userType === 2 && this.renderBusiness()
+                {this.props.userType === 2 && <Business changeFormInput={this.props.changeFormInput} formInputs={this.props.formInputs} memberships={this.props.memberships}/>
                 }
                 {this.props.userType !== null && <input className="bold finish-button" type="submit" name="login" value="Finish" />}
               </form>

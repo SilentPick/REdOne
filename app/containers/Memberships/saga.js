@@ -6,7 +6,7 @@ import { MEMBERSHIPS_LOAD, SEND_TYPE_PAGES } from './constants';
 import { membershipsLoaded } from './actions';
 
 export function* emailconfirmed() {
-  const membershipURL = 'http://redvalley.westeurope.cloudapp.azure.com/membership';
+  const membershipURL = 'http://i-valley.westus.cloudapp.azure.com/membership';
   try {
     const res = yield call(request, membershipURL, {
       method: 'get',
