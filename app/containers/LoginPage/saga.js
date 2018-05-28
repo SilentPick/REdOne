@@ -23,7 +23,8 @@ export function* userNameAndPass() {
       toastr.error('Error!', res.errors["0"].message)
     }else{
       saveToken(res.access_token),
-      history.push("/Memberships")
+      alert(res.access_token)
+      history.push("/complete-profile")
     }
   } catch (res) {
 

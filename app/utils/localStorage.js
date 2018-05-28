@@ -1,5 +1,6 @@
 export function getToken() {
-  if(localStorage.accex_token_expires < Date.now()){
+  console.log(localStorage.access_token_expires, Date.now())
+  if(+localStorage.access_token_expires > Date.now()){
     return localStorage.getItem('access_token')
   }else{
     return
