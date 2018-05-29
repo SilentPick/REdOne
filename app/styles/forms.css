@@ -30,17 +30,8 @@ input[type="radio"] {
     display: inline;
 }
 
-.react-datepicker__navigation{
-  height: auto;
-}
 
-.react-datepicker__input-container{
-  width: 100%;
-}
 
-.react-datepicker-wrapper{
-  width: 100%;
-}
 
 .g-recaptcha div div{
   width: auto;
@@ -55,9 +46,26 @@ input[type="radio"] {
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
 
 
-.datepicker{
-  width: 80%;
-  margin-top: 10px;
+.table-header{
+  	background-color: #f9f9f8;
+}
+
+.tg th{
+  border-style: none;
+  color: rgba(0, 0, 0, 0.4)
+}
+
+.tg td{
+  border-style: none;
+  color: rgba(0, 0, 0, 0.4)
+}
+
+.day{
+  text-align: left;
+}
+
+.tg-qcjy{
+  text-align: left;
 }
 
 .select-category{

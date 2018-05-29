@@ -2,7 +2,6 @@ import React from 'react';
 import ReactFileReader from 'react-file-reader';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'react-datepicker';
 import FileImage from 'react-image-file';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
@@ -60,10 +59,12 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
     }
     return (
       <tr>
-        <td className="tg-yw4l">{day}</td>
+        <td className="day tg-yw4l">{day}</td>
         <td className="tg-yw4l" colSpan={isClose ? 2 : false}>
           <SelectField
-            style={{ width: '100%' }}
+            labelStyle={{paddingRight: '0px'}}
+            iconStyle={{display: 'none'}}
+            style={{ width: '100%'}}
             value={this.state.openTime[index]}
             onChange={this.handleTimeChange(index)}
             maxHeight={200}
@@ -75,6 +76,8 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
           &&
           <td className="tg-yw4l">
             <SelectField
+              labelStyle={{paddingRight: '0px'}}
+              iconStyle={{display: 'none'}}
               style={{ width: '100%' }}
               value={this.state.closeTime[index]}
               onChange={this.handleTimeCloseChange(index)}
@@ -93,9 +96,9 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
       className="tg"
       style={{ width: '80%', margin: 'auto', marginTop: '14px' }}
     >
-      <tr>
+      <tr className="table-header">
         <th className="tg-qcjy">Day</th>
-        <th Name="tg-yw4l">Opening Time</th>
+        <th Name="open-time tg-yw4l">Opening Time</th>
         <th className="tg-yw4l">Closing Time</th>
       </tr>
       {this.renderTableRows()}

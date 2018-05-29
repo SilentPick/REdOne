@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFileReader from 'react-file-reader';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'react-datepicker';
+import DatePicker from 'material-ui/DatePicker';
 import FileImage from 'react-image-file';
 
 const style = {
@@ -12,11 +12,24 @@ const style = {
 
 class RegularUser extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      controlledDate: null,
+    };
+  }
+
   handleProfilePic = (files: Array<File>) => {
     this.file = files[0];
     this.forceUpdate();
     this.props.changeFormInput('picture')(files[0])
   }
+
+  handleChange = (event, date) => {
+    this.setState({
+      controlledDate: date,
+    });
+  };
 
   handleFilesImage = (files: Array<File>) => {
     this.fileImage = files[0];
@@ -44,12 +57,14 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
             style={{ width: '30%' }}
           />
           <DatePicker
-            className="underline-input type16 datepicker"
-            style={{width: '110%', margin: 'auto'}}
-            type="picker"
-            name="birthday"
-            placeholder="Birthday"
+            className="datepicker"
+            style={{ margin: 'auto'}}
+            textFieldStyle={{width: '80%'}}
+            hintText="Birthday"
+            value={this.state.controlledDate}
+            onChange={this.handleChange}
           />
+
           <TextField
             hintText="City"
             value={this.props.formInputs.location}
