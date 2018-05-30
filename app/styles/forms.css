@@ -30,7 +30,9 @@ input[type="radio"] {
     display: inline;
 }
 
-
+.memberships-container{
+  margin-bottom: 20px
+}
 
 
 .g-recaptcha div div{

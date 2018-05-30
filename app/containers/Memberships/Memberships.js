@@ -28,21 +28,12 @@ import { membershipsLoad, changeUserType, changeFormInput, sendTypePages } from 
 import { makeSelectMemberships, userType, formInputs } from './selectors';
 import reducer from './reducer';
 import Membership from '../../components/Memberships';
+import messages from './messages';
+import { FormattedMessage } from 'react-intl';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import RegularUser from '../../components/RegularUser';
 import Business from '../../components/Business';
-
-const style = {
-  marginTop: 12,
-  width: '100%',
-};
-
-const styles = {
-  customWidth: {
-    width: 150,
-  },
-};
 
 class Memberships extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -50,21 +41,11 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
     this.state = {
       openTime: [null, null, null, null, null, null, null],
       closeTime: [null, null, null, null, null, null, null],
-      startDate: '',
     };
-    this.handleChange = this.handleChangePicker.bind(this);
   }
 
   componentDidMount() {
     this.props.membershipsLoad();
-  }
-
-  handleChange = (event, index, value) => this.setState({ value });
-
-  handleChangePicker(date) {
-    this.setState({
-      startDate: date,
-    });
   }
 
   render(){
@@ -84,24 +65,31 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
                 <h3
                   className="vertical-padding bold top-text"
                 >
-                  Please provide us with a few additional details.
+                  <FormattedMessage {...messages.headerText} />
                 </h3>
                 <SelectField
                   value={this.props.userType}
                   onChange={this.props.changeUserType}
-                  floatingLabelText="Select User Type"
+                  floatingLabelText={<FormattedMessage {...messages.userType} />}
                   style={{ textAlign: 'left' }}
                   name="category"
                   className="contact-select type14 select-category"
                 >
-                  <MenuItem value={1} primaryText="Regular User" />
-                  <MenuItem value={2} primaryText="Business" />
+                  <MenuItem value={1} primaryText={<FormattedMessage {...messages.regularType} />} />
+                  <MenuItem value={2} primaryText={<FormattedMessage {...messages.businessType} />} />
                 </SelectField>
                 {this.props.userType === 1 && <RegularUser changeFormInput={this.props.changeFormInput} formInputs={this.props.formInputs}/>
                 }
                 {this.props.userType === 2 && <Business changeFormInput={this.props.changeFormInput} formInputs={this.props.formInputs} memberships={this.props.memberships}/>
                 }
-                {this.props.userType !== null && <input className="bold finish-button" type="submit" name="login" value="Finish" />}
+                {this.props.userType !== null && <FormattedMessage {...messages.finishBtn}>
+                  {(message) => (<input
+                    className="bold finish-button"
+                    type="submit"
+                    name="login"
+                    value={message}
+                  />)}
+                </FormattedMessage>}
               </form>
             </div>
           </form>

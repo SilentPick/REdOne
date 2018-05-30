@@ -6,6 +6,8 @@ import FileImage from 'react-image-file';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import Membership from '../Memberships';
+import messages from './messages';
+import { FormattedMessage } from 'react-intl';
 
 const style = {
   marginTop: 12,
@@ -49,7 +51,7 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
 
   renderTableRows = () => ['Monday', 'Tuesday', 'Wesnesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => {
     const isClose = (this.state.openTime[index] === 0);
-    const open = [<MenuItem value={0} key={'close'} primaryText={'Close'} />];
+    const open = [<MenuItem value={0} key={'close'} primaryText={<FormattedMessage {...messages.closeStatus} />} />];
     for (let i = 0; i < 48; i++) {
       open.push(<MenuItem value={i + 1} key={i} primaryText={`${Math.floor(i / 2)}:${i % 2 === 0 ? '00' : '30'}`} />);
     }
@@ -59,7 +61,7 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
     }
     return (
       <tr>
-        <td className="day tg-yw4l">{day}</td>
+        <td className="day tg-yw4l">{<FormattedMessage {...messages["day" + index]} />}</td>
         <td className="tg-yw4l" colSpan={isClose ? 2 : false}>
           <SelectField
             labelStyle={{paddingRight: '0px'}}
@@ -97,9 +99,9 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
       style={{ width: '80%', margin: 'auto', marginTop: '14px' }}
     >
       <tr className="table-header">
-        <th className="tg-qcjy">Day</th>
-        <th Name="open-time tg-yw4l">Opening Time</th>
-        <th className="tg-yw4l">Closing Time</th>
+        <th className="tg-qcjy">{<FormattedMessage {...messages.tableDay} />}</th>
+        <th Name="open-time tg-yw4l">{<FormattedMessage {...messages.openingTime} />}</th>
+        <th className="tg-yw4l">{<FormattedMessage {...messages.closingTime} />}</th>
       </tr>
       {this.renderTableRows()}
     </table>
@@ -122,29 +124,29 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
       <div>
         <div className="register-final-table">
           <div className="register-final-left-col">
-            <TextField hintText="Name"
+            <TextField hintText={<FormattedMessage {...messages.nameInput} />}
               value={this.props.formInputs.name}
               onChange={this.props.changeFormInput('name')}
               style={{ width: '80%' }}
             />
             <TextField
-              hintText="Phone number"
+              hintText={<FormattedMessage {...messages.phoneInput} />}
               value={this.props.formInputs.phoneNumber}
               onChange={this.props.changeFormInput('phoneNumber')}
               style={{ width: '50%', verticalAlign: 'middle' }}
             />
-            <RaisedButton label="Verify" style={{ width: '30%' }} />
+            <RaisedButton label={<FormattedMessage {...messages.verifyBtn} />} style={{ width: '30%' }} />
             {this.renderTable()}
           </div>
           <div className="register-final-right-col">
             <TextField
-              hintText="Business Name"
+              hintText={<FormattedMessage {...messages.businessName} />}
               value={this.props.formInputs.contactName}
               onChange={this.props.changeFormInput('contactName')}
               style={{ width: '77%' }}
             />
             <TextField
-              hintText="Business Contact Number"
+              hintText={<FormattedMessage {...messages.businessNumber} />}
               value={this.props.formInputs.contactNumber}
               onChange={this.props.changeFormInput('contactNumber')}
               style={{ width: '77%' }}
@@ -156,7 +158,7 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
                 </ReactFileReader>
               : <ReactFileReader handleFiles={this.handleFiles}>
                   <img />
-                  <RaisedButton label="Choose Business Logo" style={style} />
+                  <RaisedButton label={<FormattedMessage {...messages.businessLogo} />} style={style} />
                 </ReactFileReader>
             }
             {this.fileImage
@@ -165,18 +167,18 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
                 </ReactFileReader>
               : <ReactFileReader handleFiles={this.handleFilesImage}>
                   <img />
-                  <RaisedButton label="Choose Banner Image" style={style} />
+                  <RaisedButton label={<FormattedMessage {...messages.banerImage} />} style={style} />
                 </ReactFileReader>
             }
             <TextField
-              hintText="City"
+              hintText={<FormattedMessage {...messages.cityInput} />}
               value={this.props.formInputs.location}
               onChange={this.props.changeFormInput('location')}
               style={{ width: '77%' }}
             />
             <TextField
               hintText="Message Field"
-              floatingLabelText=" Business Description"
+              floatingLabelText={<FormattedMessage {...messages.descriptionInput} />}
               value={this.props.formInputs.serviceDescription}
               onChange={this.props.changeFormInput('serviceDescription')}
               multiLine
@@ -188,7 +190,7 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
         <br />
         <br />
         <p style={{ textAlign: 'center', fontSize: '20px', margin: 'auto', marginTop: '50px' }}>
-          Please subscribe for a membership
+          <FormattedMessage {...messages.middleText} />
         </p>
         <div style={{ height: '1px', width: '100%', background: 'grey', marginBottom: '30px', marginTop: '5px' }} />
         <div className="memberships-container">

@@ -2,7 +2,9 @@ import React from 'react';
 import renderHTML from 'react-render-html';
 import PropTypes from 'prop-types';
 import request from 'utils/request';
-import { getToken } from 'utils/localStorage'
+import { getToken } from 'utils/localStorage';
+import messages from './messages';
+import { FormattedMessage } from 'react-intl';
 
 import '../../styles/style.css';
 import '../../styles/normalize.css';
@@ -20,7 +22,7 @@ class Membership extends React.Component { // eslint-disable-line react/prefer-s
         </ul>
         <div className="service-buttons-container">
           <p className="service-prices type35 bolder">{`$${this.props.membershipCost}`}<span className="type20 bolder">.99</span></p>
-          <div
+          <button
             className="listing-btn type16 bold u-cf" onClick={() => {
               request('http://i-valley.westus.cloudapp.azure.com/paymember', {
                 headers: {
@@ -40,7 +42,7 @@ class Membership extends React.Component { // eslint-disable-line react/prefer-s
               });
             }
           }
-          >Upgrade</div>
+          ><FormattedMessage {...messages.upgradeBtn} /></button>
         </div>
       </div>
     );

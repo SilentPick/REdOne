@@ -4,6 +4,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import FileImage from 'react-image-file';
+import messages from './messages';
+import { FormattedMessage } from 'react-intl';
 
 const style = {
   marginTop: 12,
@@ -42,31 +44,31 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
       <div className="register-final-table">
         <div className="register-final-left-col">
           <TextField
-            hintText="Name"
+            hintText={<FormattedMessage {...messages.nameInput} />}
             value={this.props.formInputs.name}
             onChange={this.props.changeFormInput('name')}
             style={{ width: '80%' }}
           />
           <TextField
-            hintText="Phone number"
+            hintText={<FormattedMessage {...messages.phoneInput} />}
             value={this.props.formInputs.phoneNumber}
             onChange={this.props.changeFormInput('phoneNumber')}
             style={{ width: '50%', verticalAlign: 'middle' }}
           />
-          <RaisedButton label="Verify"
+          <RaisedButton label={<FormattedMessage {...messages.verifyBtn} />}
             style={{ width: '30%' }}
           />
           <DatePicker
             className="datepicker"
             style={{ margin: 'auto'}}
             textFieldStyle={{width: '80%'}}
-            hintText="Birthday"
+            hintText={<FormattedMessage {...messages.birthdayInput} />}
             value={this.state.controlledDate}
             onChange={this.handleChange}
           />
 
           <TextField
-            hintText="City"
+            hintText={<FormattedMessage {...messages.cityInput} />}
             value={this.props.formInputs.location}
             onChange={this.props.changeFormInput('location')}
             style={{ width: '80%' }}
@@ -74,7 +76,7 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
         </div>
         <div className="register-final-right-col">
           <TextField
-            hintText="ID"
+            hintText={<FormattedMessage {...messages.idInput} />}
             value={this.props.formInputs.idNumber}
             onChange={this.props.changeFormInput('idNumber')}
             style={{ width: '77%' }}
@@ -92,9 +94,9 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
             : <ReactFileReader
                 handleFiles={this.handleProfilePic}
               >
-                <img className="create-wedding__image" />
+                <img />
                 <RaisedButton
-                  label="Choose Profile Picture"
+                  label={<FormattedMessage {...messages.profilePicture} />}
                   style={style}
                 />
               </ReactFileReader>
@@ -112,9 +114,9 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
             : <ReactFileReader
                 handleFiles={this.handleFilesImage}
               >
-                <img className="create-wedding__image" />
+                <img />
                 <RaisedButton
-                  label="Choose Baner Image"
+                  label={<FormattedMessage {...messages.banerImage} />}
                   style={style}
                 />
               </ReactFileReader>
