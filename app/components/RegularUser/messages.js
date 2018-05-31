@@ -14,6 +14,10 @@ export default defineMessages({
     id: 'boilerplate.components.regularUser.phone.input',
     defaultMessage: 'Phone number',
   },
+  codeInput: {
+    id: 'boilerplate.components.regularUser.code.input',
+    defaultMessage: 'Insert your code',
+  },
   verifyBtn: {
     id: 'boilerplate.components.regularUser.verify.btn',
     defaultMessage: 'Verify',

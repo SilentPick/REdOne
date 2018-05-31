@@ -18,7 +18,10 @@ class Membership extends React.Component { // eslint-disable-line react/prefer-s
         <img className="bot-margin" src={`${this.props.membershiсpIconPath}/${this.props.membershipIcon}`} />
         <hr className="solid" />
         <ul className="service-checklist">
-          <li className="service-available type14"><i className="fa fa-check-circle" aria-hidden="true"></i>{renderHTML(this.props.membershipDescription)}</li>
+          <li className="service-available type14"><i className="fa fa-check-circle" aria-hidden="true"></i>{
+            // renderHTML(this.props.membershipDescription)
+            console.log('HTML', this.props.membershipDescription)
+          }</li>
         </ul>
         <div className="service-buttons-container">
           <p className="service-prices type35 bolder">{`$${this.props.membershipCost}`}<span className="type20 bolder">.99</span></p>

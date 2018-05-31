@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactFileReader from 'react-file-reader';
+import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
@@ -18,8 +19,18 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
     super(props);
     this.state = {
       controlledDate: null,
+      inputChange: false,
+      open: true,
     };
   }
+
+  handleActionClick = () => {
+   this.setState({
+     open: false,
+   });
+ };
+
+
 
   handleProfilePic = (files: Array<File>) => {
     this.file = files[0];
@@ -39,6 +50,12 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
     this.props.changeFormInput('bannerImage')({target: {value: files[0]}})
   }
 
+  handleChangeInput =() =>{
+    this.setState({
+      inputChange: true
+    })
+  }
+
   render() {
     return (
       <div className="register-final-table">
@@ -49,15 +66,30 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
             onChange={this.props.changeFormInput('name')}
             style={{ width: '80%' }}
           />
-          <TextField
+          {!this.state.inputChange ?[<TextField
             hintText={<FormattedMessage {...messages.phoneInput} />}
             value={this.props.formInputs.phoneNumber}
             onChange={this.props.changeFormInput('phoneNumber')}
             style={{ width: '50%', verticalAlign: 'middle' }}
-          />
+          />,
           <RaisedButton label={<FormattedMessage {...messages.verifyBtn} />}
             style={{ width: '30%' }}
-          />
+            onClick={
+              this.handleChangeInput
+            }
+          />]
+          :[<TextField
+            hintText={<FormattedMessage {...messages.codeInput} />}
+            value={this.props.formInputs.phoneNumber}
+            onChange={this.props.changeFormInput('phoneNumber')}
+            style={{margin: 'auto', width: '80%', verticalAlign: 'middle' }}
+          />,<Snackbar
+          action="Re-send"
+          open={this.state.open}
+          message="Did not receive your letter?"
+          onActionClick={this.handleActionClick}
+          onRequestClose={(clickaway) => null}
+        />]}
           <DatePicker
             className="datepicker"
             style={{ margin: 'auto'}}
