@@ -32,19 +32,17 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
 
 
 
-  handleProfilePic = (files: Array<File>) => {
+  handleProfilePic = (files) => {
     this.file = files[0];
     this.forceUpdate();
-    this.props.changeFormInput('picture')(files[0])
+    this.props.changeFormInput('picture')({target: {value: files[0]}})
   }
 
   handleChange = (event, date) => {
-    this.setState({
-      controlledDate: date,
-    });
+    this.props.changeFormInput('birthday')({target: {value: date}})
   };
 
-  handleFilesImage = (files: Array<File>) => {
+  handleFilesImage = (files) => {
     this.fileImage = files[0];
     this.forceUpdate();
     this.props.changeFormInput('bannerImage')({target: {value: files[0]}})
@@ -95,7 +93,7 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
             style={{ margin: 'auto'}}
             textFieldStyle={{width: '80%'}}
             hintText={<FormattedMessage {...messages.birthdayInput} />}
-            value={this.state.controlledDate}
+            value={this.props.formInputs.birthday}
             onChange={this.handleChange}
           />
 
@@ -121,6 +119,7 @@ class RegularUser extends React.Component { // eslint-disable-line react/prefer-
                   width="300"
                   height="200"
                   file={this.file}
+
                 />
               </ReactFileReader>
             : <ReactFileReader

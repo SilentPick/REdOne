@@ -1,22 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
-import ImageLoader from 'react-image-file';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import ReactFileReader from 'react-file-reader';
-import FileImage from 'react-image-file';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -27,7 +11,6 @@ import saga from './saga';
 import { membershipsLoad, changeUserType, changeFormInput, sendTypePages } from './actions';
 import { makeSelectMemberships, userType, formInputs } from './selectors';
 import reducer from './reducer';
-import Membership from '../../components/Memberships';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
 import Footer from '../../components/Footer';
@@ -54,12 +37,13 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
         <Header></Header>
         <section id="page-small" className="u-cf">
           <form
+            onSubmit={this.props.sendTypePages}
             name="register-final"
             className="register-final-form"
           >
             <div className="page-small-single-col white-bg shadow rounded-corners u-cf email-confirm-container">
               <form
-                onSubmit={this.props.sendTypePages}
+
                 name="register-final"
               >
                 <h3
@@ -101,6 +85,7 @@ class Memberships extends React.PureComponent { // eslint-disable-line react/pre
 }
 
 Memberships.propTypes = {
+  sendTypePages: PropTypes.func,
   memberships: PropTypes.object,
   userType: PropTypes.number,
 };
@@ -124,7 +109,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
 const withReducer = injectReducer({ key: 'emailconfirmed', reducer });
 const withSaga = injectSaga({ key: 'emailconfirmed', saga });
 

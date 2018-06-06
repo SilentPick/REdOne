@@ -1,7 +1,6 @@
 import React from 'react';
 import Recaptcha from 'react-grecaptcha';
 import { Link } from 'react-router-dom';
-import { OldSocialLogin as SocialLogin } from 'react-social-login';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -14,8 +13,6 @@ import { changeUsername, changeEmail, sendregistration, changePassword, changeRe
 import { makeSelectUsername, makeSelectEmail, makeSelectPassword, makeSelectRepeatPassword } from './selectors';
 import reducer from './reducer';
 import messages from './messages';
-import history from '../app';
-import request from 'utils/request';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import RedOne from '../../components/RedOneBlock';

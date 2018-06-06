@@ -22,8 +22,7 @@ export function* userNameAndPass() {
     if (res.hasError){
       toastr.error('Error!', res.errors["0"].message)
     }else{
-      saveToken(res.access_token),
-      alert(res.access_token)
+      saveToken(res.access_token, res.id),
       history.push("/complete-profile")
     }
   } catch (res) {

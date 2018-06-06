@@ -1,22 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
-import ImageLoader from 'react-image-file';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import ReactFileReader from 'react-file-reader';
-import FileImage from 'react-image-file';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

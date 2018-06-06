@@ -13,9 +13,9 @@ class Membership extends React.Component { // eslint-disable-line react/prefer-s
 
   render() {
     return (
-      <div className="membership-selection-container fl-left">
+      <div className="membership-selection-container fl-left" style={{marginBottom: '20px'}}>
         <p className="service-name bolder type25">{this.props.membershipType}</p>
-        <img className="bot-margin" src={`${this.props.membershiсpIconPath}/${this.props.membershipIcon}`} />
+        <img className="bot-margin" src={`${this.props.membershipIconPath}/${this.props.membershipIcon}`} />
         <hr className="solid" />
         <ul className="service-checklist">
           <li className="service-available type14"><i className="fa fa-check-circle" aria-hidden="true"></i>{

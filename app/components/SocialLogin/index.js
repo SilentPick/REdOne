@@ -16,7 +16,7 @@ class Social extends React.Component { // eslint-disable-line react/prefer-state
         idToken: params._token.idToken
       }),
     }).then(() => {
-      saveToken(res.access_token),
+      saveToken(res.access_token, res.id),
       history.push("/Memberships")
     })
   };

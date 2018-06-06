@@ -107,16 +107,16 @@ class Business extends React.Component { // eslint-disable-line react/prefer-sta
     </table>
   )
 
-  handleFilesImage = (files: Array<File>) => {
+  handleFilesImage = (files) => {
     this.fileImage = files[0];
     this.forceUpdate();
     this.props.changeFormInput('bannerImage')({target: {value: files[0]}})
   }
 
-  handleFiles = (files: Array<File>) => {
+  handleFiles = (files) => {
     this.file = files[0];
     this.forceUpdate();
-    this.props.changeFormInput('businessLogo')(files[0])
+    this.props.changeFormInput('businessLogo')({target: {value: files[0]}})
   }
 
   render() {
