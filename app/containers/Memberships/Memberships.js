@@ -7,10 +7,9 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import { membershipsLoad, changeUserType, changeFormInput, sendTypePages } from './actions';
-import { makeSelectMemberships, userType, formInputs } from './selectors';
-import reducer from './reducer';
+import membershipsSaga from '../../sagas/memberships';
+import { membershipsSelectors } from '../../selectors';
+import { membershipsActions, membershipsReducer } from '../../redux-main';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
 import Footer from '../../components/Footer';
@@ -94,23 +93,23 @@ export function mapDispatchToProps(dispatch) {
   return {
     sendTypePages: (evt) => {
       evt.preventDefault();
-      dispatch(sendTypePages());
+      dispatch(membershipsActions.sendTypePages());
     },
-    membershipsLoad: () => dispatch(membershipsLoad()),
-    changeUserType: (a, b, value) => dispatch(changeUserType(value)),
-    changeFormInput: (inputName) => (e) => dispatch(changeFormInput(e.target.value, inputName))
+    membershipsLoad: () => dispatch(membershipsActions.membershipsLoad()),
+    changeUserType: (a, b, value) => dispatch(membershipsActions.changeUserType(value)),
+    changeFormInput: (inputName) => (e) => dispatch(membershipsActions.changeFormInput(e.target.value, inputName))
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  memberships: makeSelectMemberships(),
-  userType: userType(),
-  formInputs: formInputs(),
+  memberships: membershipsSelectors.makeSelectMemberships(),
+  userType: membershipsSelectors.userType(),
+  formInputs: membershipsSelectors.formInputs(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({ key: 'emailconfirmed', reducer });
-const withSaga = injectSaga({ key: 'emailconfirmed', saga });
+const withReducer = injectReducer({ key: 'selectmemberships', reducer: membershipsReducer });
+const withSaga = injectSaga({ key: 'selectmemberships', saga: membershipsSaga });
 
 export default compose(
  withReducer,

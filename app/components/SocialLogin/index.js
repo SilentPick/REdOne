@@ -2,7 +2,7 @@ import React from 'react';
 import { OldSocialLogin as SocialLogin } from 'react-social-login';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import { history } from 'app';
+import { history } from '../../history';
 import request from 'utils/request';
 
 

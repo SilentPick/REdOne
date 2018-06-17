@@ -8,10 +8,9 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import { changeUsername, changeEmail, sendregistration, changePassword, changeRepeatPassword } from './actions';
-import { makeSelectUsername, makeSelectEmail, makeSelectPassword, makeSelectRepeatPassword } from './selectors';
-import reducer from './reducer';
+import registration from '../../sagas/registration';
+import { registrationSelectors } from '../../selectors';
+import { registrationActions, registrationReducer } from '../../redux-main';
 import messages from './messages';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -130,26 +129,26 @@ export function mapDispatchToProps(dispatch) {
   return {
     registrationForm: (evt) => {
       evt.preventDefault();
-      dispatch(sendregistration());
+      dispatch(registrationActions.sendregistration());
     },
-    onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
-    onChangeEmail: (evt) => dispatch(changeEmail(evt.target.value)),
-    onChangePassword: (evt) => dispatch(changePassword(evt.target.value)),
-    onChangeRepeatPassword: (evt) => dispatch(changeRepeatPassword(evt.target.value)),
+    onChangeUsername: (evt) => dispatch(registrationActions.changeUsername(evt.target.value)),
+    onChangeEmail: (evt) => dispatch(registrationActions.changeEmail(evt.target.value)),
+    onChangePassword: (evt) => dispatch(registrationActions.changePassword(evt.target.value)),
+    onChangeRepeatPassword: (evt) => dispatch(registrationActions.changeRepeatPassword(evt.target.value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  username: makeSelectUsername(),
-  email: makeSelectEmail(),
-  password: makeSelectPassword(),
-  repeatpassword: makeSelectRepeatPassword(),
+  username: registrationSelectors.makeSelectUsername(),
+  email: registrationSelectors.makeSelectEmail(),
+  password: registrationSelectors.makePassword(),
+  repeatpassword: registrationSelectors.makeSelectRepeatPassword(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'registration', reducer });
-const withSaga = injectSaga({ key: 'registration', saga });
+const withReducer = injectReducer({ key: 'registration', reducer: registrationReducer });
+const withSaga = injectSaga({ key: 'registration', saga: registration });
 
 export default compose(
   withReducer,

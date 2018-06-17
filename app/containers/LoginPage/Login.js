@@ -7,11 +7,10 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import { changeUserName, changePassword, sendUserNameAndPass } from './actions';
-import { makeSelectUserName, makeSelectPassword } from './selectors';
-import { history } from 'app';
-import reducer from './reducer';
+import loginSaga from '../../sagas/login';
+import { loginSelectors } from '../../selectors';
+import { loginActions, loginReducer } from '../../redux-main';
+import { history } from '../../history';
 import messages from './messages';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -125,22 +124,22 @@ export function mapDispatchToProps(dispatch) {
   return {
     userNameAndPassForm: (evt) => {
       evt.preventDefault();
-      dispatch(sendUserNameAndPass());
+      dispatch(loginActions.sendUserNameAndPass());
     },
-    onChangeUserName: (evt) => dispatch(changeUserName(evt.target.value)),
-    onChangePassword: (evt) => dispatch(changePassword(evt.target.value)),
+    onChangeUserName: (evt) => dispatch(loginActions.changeUserName(evt.target.value)),
+    onChangePassword: (evt) => dispatch(loginActions.changePassword(evt.target.value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  username: makeSelectUserName(),
-  password: makeSelectPassword(),
+  username: loginSelectors.makeSelectUserName(),
+  password: loginSelectors.makeSelectPassword(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'usernameandpass', reducer });
-const withSaga = injectSaga({ key: 'usernameandpass', saga });
+const withReducer = injectReducer({ key: 'usernameandpass', reducer: loginReducer });
+const withSaga = injectSaga({ key: 'usernameandpass', saga: loginSaga });
 
 export default compose(
   withReducer,

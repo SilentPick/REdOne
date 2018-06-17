@@ -6,10 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import { changeNewPassword, changeConfirmPassword, sendNewPass } from './actions';
-import { makeSelectNewPassword, makeSelectConfirmPassword } from './selectors';
-import reducer from './reducer';
+import newPassSaga from '../../sagas/newPassword';
+import { newPassSelectors } from '../../selectors';
+import { newPasswordActions, newPasswordReducer } from '../../redux-main';
 import messages from './messages';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -78,22 +77,22 @@ export function mapDispatchToProps(dispatch) {
   return {
     SendNewPassForm: (evt, token) => {
       evt.preventDefault();
-      dispatch(sendNewPass(token));
+      dispatch(newPasswordActions.sendNewPass(token));
     },
-    onChangeNewPassword: (evt) => dispatch(changeNewPassword(evt.target.value)),
-    onChangeConfirmPassword: (evt) => dispatch(changeConfirmPassword(evt.target.value)),
+    onChangeNewPassword: (evt) => dispatch(newPasswordActions.changeNewPassword(evt.target.value)),
+    onChangeConfirmPassword: (evt) => dispatch(newPasswordActions.changeConfirmPassword(evt.target.value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  newpassword: makeSelectNewPassword(),
-  confirmpassword: makeSelectConfirmPassword(),
+  newpassword: newPassSelectors.makeSelectNewPassword(),
+  confirmpassword: newPassSelectors.makeSelectConfirmPassword(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'newpass', reducer });
-const withSaga = injectSaga({ key: 'newpass', saga });
+const withReducer = injectReducer({ key: 'newpass', reducer: newPasswordReducer });
+const withSaga = injectSaga({ key: 'newpass', saga: newPassSaga });
 
 export default compose(
   withReducer,

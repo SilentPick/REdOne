@@ -8,10 +8,9 @@ import messages from './messages';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import { membershipsLoad, membershipsLoaded, changeFormInput, verifyEmailLoad } from './actions';
-import { verifyEmail } from './selectors';
-import reducer from './reducer';
+import emailConfirmSaga from '../../sagas/emailConfirmed';
+import { emailConfirmedSelectors } from '../../selectors';
+import { emailconfirmedActions, emailConfirmedReducer } from '../../redux-main';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 
@@ -57,18 +56,18 @@ EmailConfirmed.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    verifyEmailLoad: (token) => dispatch(verifyEmailLoad(token)),
+    verifyEmailLoad: (token) => dispatch(emailconfirmedActions.verifyEmailLoad(token)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  emailVerify: verifyEmail(),
+  emailVerify: emailConfirmedSelectors.verifyEmail(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'emailconfirmed', reducer });
-const withSaga = injectSaga({ key: 'emailconfirmed', saga });
+const withReducer = injectReducer({ key: 'emailconfirmed', reducer: emailConfirmedReducer });
+const withSaga = injectSaga({ key: 'emailconfirmed', saga: emailConfirmSaga });
 
 export default compose(
  withReducer,

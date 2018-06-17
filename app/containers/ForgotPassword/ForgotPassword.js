@@ -7,10 +7,9 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import { changeForgotUserName, sendForgotPass } from './actions';
-import { makeSelectForgotUserName } from './selectors';
-import reducer from './reducer';
+import forgotPassSaga from '../../sagas/forgotPassword';
+import { forgotPassSelectors } from '../../selectors';
+import { forgotPasswordActions, forgotPasswordReducer } from '../../redux-main';
 import messages from './messages';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -92,20 +91,20 @@ export function mapDispatchToProps(dispatch) {
   return {
     SendForgotPassForm: (evt) => {
       evt.preventDefault();
-      dispatch(sendForgotPass());
+      dispatch(forgotPasswordActions.sendForgotPass());
     },
-    onChangeForgorUserName: (evt) => dispatch(changeForgotUserName(evt.target.value)),
+    onChangeForgorUserName: (evt) => dispatch(forgotPasswordActions.changeForgotUserName(evt.target.value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  nameOrEmail: makeSelectForgotUserName(),
+  nameOrEmail: forgotPassSelectors.makeSelectForgotUserName(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'forgot', reducer });
-const withSaga = injectSaga({ key: 'forgot', saga });
+const withReducer = injectReducer({ key: 'forgot', reducer: forgotPasswordReducer });
+const withSaga = injectSaga({ key: 'forgot', saga: forgotPassSaga });
 
 export default compose(
   withReducer,

@@ -7,20 +7,8 @@
  */
 
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import ReduxToastr from 'react-redux-toastr/lib'
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
-
-
-import RegistrationPage from 'containers/RegistrationPage/Registration';
-import LoginPage from 'containers/LoginPage/Login';
-import EmailConfirmed from 'containers/EmailConfirmed/EmailConfirmed';
-import ForgotPassword from 'containers/ForgotPassword/ForgotPassword';
-import NewPassword from 'containers/NewPassword/NewPassword';
-import Memberships from 'containers/Memberships/Memberships';
-import {PrivateRoute} from '../../components/PrivateRoute';
-import {GuestRoute} from '../../components/GuestRoute';
+import Router from '../../routes/router'
 
 import '../../styles/forms.css';
 import '../../styles/layout.css';
@@ -31,40 +19,8 @@ import '../../styles/tables.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
-const AppWrapper = styled.div`
-
-`;
 export default function App() {
   return (
-    <MuiThemeProvider>
-      <AppWrapper>
-        {/* <Helmet
-          titleTemplate="%s - React.js Boilerplate"
-          defaultTitle="React.js Boilerplate"
-        >
-          <meta name="description" content="A React.js Boilerplate application" />
-        </Helmet>
-        <Header /> */}
-        <Switch>
-          <GuestRoute exact path="/Registration" component={RegistrationPage} />
-          <Route path="/register-complete/:token" component={EmailConfirmed} />
-          <Route path="/ForgotPassword" component={ForgotPassword} />
-          <Route path="/reset-password/:token" component={NewPassword} />
-          <GuestRoute path="/Login" component={LoginPage} />
-          <PrivateRoute path="/complete-profile" component={Memberships} />
-          <Route path="/" component={LoginPage} />
-        </Switch>
-        <ReduxToastr
-          timeOut={4000}
-          newestOnTop={false}
-          preventDuplicates
-          position="top-left"
-          transitionIn="fadeIn"
-          transitionOut="fadeOut"
-          progressBar
-        />
-        {/* <Footer />*/}
-      </AppWrapper>
-    </MuiThemeProvider>
+    <Router />
   );
 }

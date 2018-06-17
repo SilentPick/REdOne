@@ -19,6 +19,7 @@ import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
+import { history } from './history';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -62,7 +63,6 @@ openSansObserver.load().then(() => {
 
 // Create redux store with history
 const initialState = {};
-export const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
