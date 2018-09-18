@@ -60,11 +60,11 @@ const initialState = fromJS({
   switch (action.type) {
     case MEMBERSHIPS_LOADED:
       return state.set('memberships', action.res);
-      case USER_TYPE:
-        return state.set('usertype', action.inputValue);
-      case CHANGE_FORM_INPUT:
-        console.log(action)
-        return state.setIn(['formInputs', action.inputName], action.inputValue);
+    case USER_TYPE:
+      return state.set('usertype', action.inputValue);
+    case CHANGE_FORM_INPUT:
+      console.log(action)
+      return state.setIn(['formInputs', action.inputName], action.inputValue);
     default:
       return state;
   }

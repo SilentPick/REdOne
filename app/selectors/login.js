@@ -10,8 +10,13 @@ const makeSelectPassword = () => createSelector(
   selectUserNameAndPass,
   (userNameAndPassState) => userNameAndPassState.get('password')
 );
+const userInfo = () => createSelector(
+  selectUserNameAndPass,
+  (userNameAndPassState) => userNameAndPassState.get('userinfo')
+);
 
 export const loginSelectors = {
   makeSelectUserName,
-  makeSelectPassword
+  makeSelectPassword,
+  userInfo
 };

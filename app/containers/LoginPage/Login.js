@@ -18,6 +18,11 @@ import RedOne from '../../components/RedOneBlock';
 import Social from '../../components/SocialLogin';
 
 class Login extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentDidMount() {
+    this.props.userInfo()
+  }
+
   render() {
     return (
       <div>
@@ -126,12 +131,14 @@ export function mapDispatchToProps(dispatch) {
       evt.preventDefault();
       dispatch(loginActions.sendUserNameAndPass());
     },
+    userInfo: (evt) => dispatch(loginActions.userInfo()),
     onChangeUserName: (evt) => dispatch(loginActions.changeUserName(evt.target.value)),
     onChangePassword: (evt) => dispatch(loginActions.changePassword(evt.target.value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
+  userInfo:loginSelectors.userInfo(),
   username: loginSelectors.makeSelectUserName(),
   password: loginSelectors.makeSelectPassword(),
 });

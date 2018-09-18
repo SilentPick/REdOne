@@ -17,9 +17,14 @@ const CHANGE_EMAIL = 'boilerplate/Registration/CHANGE_EMAIL';
 const CHANGE_PASS = 'boilerplate/Registration/CHANGE_PASS';
 const CHANGE_REPEATPASSWORD = 'boilerplate/Registration/CHANGE_REPEATPASSWORD';
 const SEND_REGISTRATION = 'boilerplate/Registration/SEND_REGISTRATION';
+const USER_INFO = 'boilerplate/LoginPage/USER_INFO';
+const USER_INFO_LOADED = 'boilerplate/LoginPage/USER_INFO_LOADED';
+
 
 
 export {
+  USER_INFO_LOADED,
+  USER_INFO,
   CHANGE_USERNAMEREG,
   CHANGE_NEWPASSWORD,
   CHANGE_CONFIRMPASSWORD,
